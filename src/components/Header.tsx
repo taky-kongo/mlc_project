@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 import React, { useState } from 'react';
-import logo from '../assets/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
+import logo from '../../public/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
 
 const Header: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

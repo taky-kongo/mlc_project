@@ -7,12 +7,12 @@ const PhotoGallery: React.FC = () => {
     const carouselRef = useRef<HTMLDivElement>(null); // Référence pour le conteneur du carrousel
 
     const photos = [
-        { src: "../assets/img/galerie/photo1.jpeg", alt: "Description Photo 1" },
-        { src: "../assets/img/galerie/photo2.jpeg", alt: "Description Photo 2" },
-        { src: "../assets/img/galerie/photo3.jpeg", alt: "Description Photo 3" },
-        { src: "../assets/img/galerie/photo4.jpeg", alt: "Description Photo 4" },
-        { src: "../assets/img/galerie/phoyo5.jpeg", alt: "Description Photo 5" },
-        { src: "../assets/img/galerie/photo6.jpeg", alt: "Description Photo 6" },
+        { src: "../../public/img/galerie/photo1.jpeg", alt: "Description Photo 1" },
+        { src: "../../public/img/galerie/photo2.jpeg", alt: "Description Photo 2" },
+        { src: "../../public/img/galerie/photo3.jpeg", alt: "Description Photo 3" },
+        { src: "../../public/img/galerie/photo4.jpeg", alt: "Description Photo 4" },
+        { src: "../../public/img/galerie/phoyo5.jpeg", alt: "Description Photo 5" },
+        { src: "../../public/img/galerie/photo6.jpeg", alt: "Description Photo 6" },
     ];
 
     // Effet pour la transition d'apparition de la section

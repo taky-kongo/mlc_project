@@ -1,6 +1,6 @@
 // src/components/HowItWorks.tsx
 import React, { useState, useEffect, useRef } from 'react';
-import fonctionnementImg from '../assets/img/fonctionnement.png'; // Import de l'image
+import fonctionnementImg from '../../public/img/fonctionnement.png'; // Import de l'image
 
 const HowItWorks: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
