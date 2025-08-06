@@ -35,7 +35,7 @@ const countries = [
     { code: '+94', name: 'Sri Lanka', flag: '🇱🇰' },
     { code: '+95', name: 'Myanmar', flag: '🇲🇲' },
     { code: '+98', name: 'Iran', flag: '🇮🇷' },
-    { code: '+212', name: 'Maroc', flag: '🇲🇦' },
+    { code: '+212', name: 'Maroc', flag: '�🇦' },
     { code: '+213', name: 'Algérie', flag: '🇩🇿' },
     { code: '+216', name: 'Tunisie', flag: '🇹🇳' },
     { code: '+220', name: 'Gambie', flag: '🇬🇲' },
@@ -146,6 +146,7 @@ const ContactForm: React.FC = () => {
         };
 
         try {
+            // L'URL du webhook est maintenant directement utilisée ici
             const response = await fetch('https://n8n-mtpk.onrender.com/webhook-test/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3', {
                 method: 'POST',
                 headers: {
@@ -196,16 +197,16 @@ const ContactForm: React.FC = () => {
                             </div>
                             <div>
                                 <label htmlFor="phone" className="block text-gray-600">Numéro de téléphone</label>
-                                <div className="flex mt-1 relative" ref={dropdownRef}>
+                                <div className="flex flex-col sm:flex-row mt-1 relative w-full" ref={dropdownRef}>
                                     {/* Déclencheur du dropdown personnalisé */}
                                     <div
-                                        className="flex items-center justify-between w-48 px-4 py-3 bg-white border border-gray-300 rounded-l-md text-gray-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
+                                        className="flex items-center justify-between w-full sm:w-48 px-4 py-3 bg-white border border-gray-300 rounded-md sm:rounded-r-none text-gray-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
                                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                     >
-                    <span className="flex items-center space-x-2">
-                      <span>{selectedCountry.flag}</span>
-                      <span>{selectedCountry.code}</span>
-                    </span>
+                                        <span className="flex items-center space-x-2">
+                                            <span>{selectedCountry.flag}</span>
+                                            <span>{selectedCountry.code}</span>
+                                        </span>
                                         <svg
                                             className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
                                             fill="none"
@@ -219,7 +220,7 @@ const ContactForm: React.FC = () => {
 
                                     {/* Contenu du dropdown avec barre de recherche (affiché conditionnellement) */}
                                     {isDropdownOpen && (
-                                        <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-300 rounded-md shadow-lg z-20">
+                                        <div className="absolute top-full left-0 mt-1 w-full sm:w-64 bg-white border border-gray-300 rounded-md shadow-lg z-20">
                                             <input
                                                 type="text"
                                                 placeholder="Rechercher un pays..."
@@ -249,7 +250,7 @@ const ContactForm: React.FC = () => {
                                     <input
                                         type="tel"
                                         id="phone"
-                                        className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-r-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
+                                        className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-md sm:rounded-l-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#3a75ff] mt-2 sm:mt-0"
                                         value={contacts}
                                         onChange={(e) => setContacts(e.target.value)}
                                         required
