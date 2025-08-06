@@ -18,9 +18,13 @@ const Hero: React.FC = () => {
                 <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto mb-8">
                     Découvrez une nouvelle opportunité d'investissement et développez votre patrimoine.
                 </p>
-                <button className="bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+                {/* Le bouton est maintenant un lien qui pointe vers la section contact */}
+                <a
+                    href="#contact"
+                    className="inline-block bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
+                >
                     Je rejoins la communauté maintenant !
-                </button>
+                </a>
             </div>
         </section>
     );
