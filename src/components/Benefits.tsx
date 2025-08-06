@@ -11,7 +11,7 @@ const Benefits: React.FC = () => {
     // Remplacez cette URL par l'URL de votre vidéo de présentation.
     // Utilisez un format compatible avec le web (ex: .mp4, .webm) ou un lien de partage YouTube valide.
     // Les liens "blob:https://www.youtube.com/..." sont temporaires et ne fonctionneront pas ici.
-    const videoUrl = "/src/assets/img/presentation_mlc.mp4"; // Exemple : remplacez par votre lien valide
+    const videoUrl = "/img/presentation_mlc.mp4"; // Exemple : remplacez par votre lien valide
 
     return (
         <section id="benefits" className="bg-gray-100 py-20">

@@ -53,7 +53,7 @@ const AboutUs: React.FC = () => {
                     {/* Image 1 */}
                     <div className="flex flex-col items-center">
                         <img
-                            src="../../public/img/offre_mlc.jpg"
+                            src="/img/offre_mlc.jpg"
                             alt="Innovation"
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
@@ -65,7 +65,7 @@ const AboutUs: React.FC = () => {
                     {/* Image 2 */}
                     <div className="flex flex-col items-center">
                         <img
-                            src="../../public/img/certificat_mlc.jpg"
+                            src="/img/certificat_mlc.jpg"
                             alt="Recherche et Développement"
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
@@ -77,7 +77,7 @@ const AboutUs: React.FC = () => {
                     {/* Image 3 */}
                     <div className="flex flex-col items-center">
                         <img
-                            src="../../public/img/prevision_mlc.jpg"
+                            src="/img/prevision_mlc.jpg"
                             alt="Impact sur la Santé"
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
