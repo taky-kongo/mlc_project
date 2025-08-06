@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar hide for webkit browsers */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* For Firefox */
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+}
