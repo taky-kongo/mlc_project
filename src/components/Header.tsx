@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 import React, { useState } from 'react';
-import logo from '../../public/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
+import logo from '/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
 
 const Header: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ const Header: React.FC = () => {
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="/" className="flex items-center space-x-2">
                     <img src={logo} alt="Logo Projet MLC" className="h-8" />
-                    <span className="text-xl font-bold text-gray-900">Projet MLC</span>
+                    <span className="text-xl font-bold text-gray-900">MLC</span>
                 </a>
 
                 {/* Navigation pour écrans larges (Desktop) */}
