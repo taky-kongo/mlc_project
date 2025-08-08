@@ -56,6 +56,14 @@ const TimedModal: React.FC = () => {
                 // Envoi réussi
                 setSubmissionMessage("C'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !");
                 setView('success');
+                // Sauvegarde les données dans le localStorage
+                localStorage.setItem('user_registration_data', JSON.stringify(formData));
+
+                // Réinitialiser les champs du formulaire seulement en cas de succès
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setWhatsapp('');
             } else {
                 // Gérer les erreurs de réponse non OK
                 setErrorMessage("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
@@ -66,12 +74,6 @@ const TimedModal: React.FC = () => {
             setErrorMessage("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
             console.error("Erreur d'envoi du formulaire:", error);
         }
-
-        // Réinitialiser les champs du formulaire après l'envoi, qu'il réussisse ou échoue
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setWhatsapp('');
     };
 
     // Ne rien afficher si le modal n'est pas visible
