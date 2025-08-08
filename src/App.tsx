@@ -8,6 +8,7 @@ import ContactForm from './components/ContactForm'; // Import du nouveau composa
 import Footer from './components/Footer';
 import AboutUs from "./components/AboutUs.tsx";
 import PhotoGallery from "./components/PhotoGallery.tsx";
+import TimedModal from "./components/TimedModal.tsx";
 
 const App: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
             <Header />
             <main>
                 <Hero />
+                <TimedModal />
                 <Benefits />
                 <HowItWorks />
                 <AboutUs />
