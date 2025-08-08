@@ -42,7 +42,7 @@ const TimedModal: React.FC = () => {
 
         try {
             const response = await fetch(
-                "https://n8n-mtpk.onrender.com/webhook-test/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3",
+                "https://n8n-mtpk.onrender.com/webhook-test/7bcba2bc-9dd2-49c5-902b-281700a5ec7f3",
                 {
                     method: 'POST',
                     headers: {
@@ -125,7 +125,7 @@ const TimedModal: React.FC = () => {
                                 id="lastName"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff]"
+                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                 required
                             />
                         </div>
@@ -136,7 +136,7 @@ const TimedModal: React.FC = () => {
                                 id="firstName"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff]"
+                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                 required
                             />
                         </div>
@@ -147,7 +147,7 @@ const TimedModal: React.FC = () => {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff]"
+                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                 required
                             />
                         </div>
@@ -158,10 +158,18 @@ const TimedModal: React.FC = () => {
                                 id="whatsapp"
                                 value={whatsapp}
                                 onChange={(e) => setWhatsapp(e.target.value)}
-                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff]"
+                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                 required
                             />
                         </div>
+                        {/* --- Début du bloc de débogage ---
+            <div className="text-sm text-gray-500 mt-4">
+              <p>Nom: {lastName}</p>
+              <p>Prénom: {firstName}</p>
+              <p>Email: {email}</p>
+              <p>WhatsApp: {whatsapp}</p>
+            </div>
+            --- Fin du bloc de débogage --- */}
                         <button
                             type="submit"
                             className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600"
