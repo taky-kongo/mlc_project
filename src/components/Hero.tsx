@@ -2,7 +2,12 @@
 import React from 'react';
 import imgHero from '/img/hero2.jpg';
 
-const Hero: React.FC = () => {
+// Définition des props pour le composant Hero
+interface HeroProps {
+    onOpenModal: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
     return (
         <section
             className="relative text-center py-40 z-0"
@@ -18,13 +23,13 @@ const Hero: React.FC = () => {
                 <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto mb-8">
                     Découvrez une nouvelle opportunité d'investissement et développez votre patrimoine.
                 </p>
-                {/* Le bouton est maintenant un lien qui pointe vers la section contact */}
-                <a
-                    href="#contact"
+                {/* Le lien a été remplacé par un bouton qui appelle la fonction d'ouverture de la modale */}
+                <button
+                    onClick={onOpenModal}
                     className="inline-block bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
                 >
                     Je rejoins la communauté maintenant !
-                </a>
+                </button>
             </div>
         </section>
     );

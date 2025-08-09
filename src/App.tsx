@@ -42,7 +42,7 @@ const App = () => {
     return (
         <>
             <Header onOpenModal={handleOpenModal} />
-            <Hero />
+            <Hero onOpenModal={handleOpenModal} />
             <AboutUs />
             <HowItWorks />
             <Benefits />
