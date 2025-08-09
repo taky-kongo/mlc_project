@@ -2,7 +2,12 @@
 import React, { useState } from 'react';
 import logo from '/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
 
-const Header: React.FC = () => {
+// Définition des props pour le composant Header
+interface HeaderProps {
+    onOpenModal: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -13,8 +18,14 @@ const Header: React.FC = () => {
         setIsMobileMenuOpen(false);
     };
 
+    // Gère l'ouverture de la modale et la fermeture du menu mobile
+    const handleOpenModalClick = () => {
+        onOpenModal();
+        closeMobileMenu();
+    };
+
     return (
-        <header className="sticky top-0 z-50 bg-white shadow-md"> {/* Z-index augmenté pour s'assurer qu'il est au-dessus de tout */}
+        <header className="sticky top-0 z-50 bg-white shadow-md">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="/" className="flex items-center space-x-2">
                     <img src={logo} alt="Logo Projet MLC" className="h-8" />
@@ -32,12 +43,12 @@ const Header: React.FC = () => {
                     <a href="#about-us" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300">
                         A propos
                     </a>
-                    <a
-                        href="#contact"
+                    <button
+                        onClick={onOpenModal}
                         className="bg-[#3a75ff] text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300"
                     >
                         Nous rejoindre
-                    </a>
+                    </button>
                 </nav>
 
                 {/* Bouton Hamburger pour Mobile */}
@@ -116,13 +127,12 @@ const Header: React.FC = () => {
                     >
                         A propos
                     </a>
-                    <a
-                        href="#contact"
-                        className="bg-[#3a75ff] text-white px-6 py-3 rounded-full font-bold text-xl hover:bg-blue-600 transition-colors duration-300"
-                        onClick={closeMobileMenu}
+                    <button
+                        onClick={handleOpenModalClick}
+                        className="bg-[#3a75ff] text-white px-6 py-3 rounded-full font-bold text-xl hover:bg-blue-600 transition-colors duration-300 w-fit"
                     >
                         Nous rejoindre
-                    </a>
+                    </button>
                 </nav>
             </div>
         </header>
