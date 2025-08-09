@@ -189,7 +189,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                     <div className="text-center">
                         <h3 className="text-3xl font-bold text-[#3a75ff] mb-4">Rejoignez-nous !</h3>
                         <p className="text-lg text-gray-700 mb-6">
-                            Voulez vous faire de l'argent ? Venez avec nous! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre.
+                            Voulez vous faire de l'argent ? Venez avec nous en cliquant sur le bouton! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre.
                         </p>
                         <button
                             onClick={() => setView('form')}
