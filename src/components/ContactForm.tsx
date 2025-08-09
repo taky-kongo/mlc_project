@@ -149,7 +149,7 @@ const ContactForm: React.FC = () => {
 
             console.log(formData);
             // L'URL du webhook est maintenant directement utilisée ici
-            const response = await fetch('https://n8n-mtpk.onrender.com/webhook-test/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3', {
+            const response = await fetch('https://n8n-mtpk.onrender.com/webhook/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
