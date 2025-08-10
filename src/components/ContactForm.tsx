@@ -274,7 +274,7 @@ const ContactForm: React.FC = () => {
                             </div>
                             <button
                                 type="submit"
-                                className={`w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 ${
+                                className={`w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer ${
                                     submissionStatus === 'loading' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
                                 }`}
                                 disabled={submissionStatus === 'loading'}

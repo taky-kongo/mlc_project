@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
                 {/* Le lien a été remplacé par un bouton qui appelle la fonction d'ouverture de la modale */}
                 <button
                     onClick={onOpenModal}
-                    className="inline-block bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
+                    className="inline-block bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer"
                 >
                     Je rejoins la communauté maintenant !
                 </button>

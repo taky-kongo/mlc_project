@@ -34,18 +34,18 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
 
                 {/* Navigation pour écrans larges (Desktop) */}
                 <nav className="hidden md:flex space-x-8 items-center">
-                    <a href="#benefits" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300">
+                    <a href="#benefits" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
                         Avantages
                     </a>
-                    <a href="#how-it-works" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300">
+                    <a href="#how-it-works" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
                         Fonctionnement
                     </a>
-                    <a href="#about-us" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300">
+                    <a href="#about-us" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
                         A propos
                     </a>
                     <button
                         onClick={onOpenModal}
-                        className="bg-[#3a75ff] text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300"
+                        className="bg-[#3a75ff] text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
                     >
                         Nous rejoindre
                     </button>
@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
 
                 {/* Bouton Hamburger pour Mobile */}
                 <div className="md:hidden flex items-center">
-                    <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none">
+                    <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none cursor-pointer">
                         <svg
                             className="w-6 h-6"
                             fill="none"
@@ -88,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
                 }`}
             >
                 <div className="flex justify-end p-6">
-                    <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none">
+                    <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none cursor-pointer">
                         <svg
                             className="w-8 h-8"
                             fill="none"
@@ -108,28 +108,28 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
                 <nav className="flex flex-col items-center space-y-8 mt-12">
                     <a
                         href="#benefits"
-                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300"
+                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
                         Avantages
                     </a>
                     <a
                         href="#how-it-works"
-                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300"
+                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
                         Fonctionnement
                     </a>
                     <a
                         href="#about-us"
-                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300"
+                        className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
                         A propos
                     </a>
                     <button
                         onClick={handleOpenModalClick}
-                        className="bg-[#3a75ff] text-white px-6 py-3 rounded-full font-bold text-xl hover:bg-blue-600 transition-colors duration-300 w-fit"
+                        className="bg-[#3a75ff] text-white px-6 py-3 rounded-full font-bold text-xl hover:bg-blue-600 transition-colors duration-300 w-fit cursor-pointer"
                     >
                         Nous rejoindre
                     </button>

@@ -189,11 +189,11 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                     <div className="text-center">
                         <h3 className="text-3xl font-bold text-[#3a75ff] mb-4">Rejoignez-nous !</h3>
                         <p className="text-lg text-gray-700 mb-6">
-                            Voulez vous faire de l'argent ? Venez avec nous en cliquant sur le bouton! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre.
+                            Libérez votre potentiel financier ! Rejoignez une communauté d'investisseurs passionnés et découvrez des opportunités exclusives pour faire fructifier votre patrimoine. Inscrivez-vous pour recevoir un message WhatsApp et un e-mail avec les prochaines étapes à suivre.
                         </p>
                         <button
                             onClick={() => setView('form')}
-                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600"
+                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600 cursor-pointer"
                         >
                             Commencer l'inscription
                         </button>
@@ -284,7 +284,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600"
+                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600 cursor-pointer"
                         >
                             Je m'inscris
                         </button>
