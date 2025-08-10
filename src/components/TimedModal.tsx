@@ -275,7 +275,8 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                                     type="tel"
                                     id="whatsapp"
                                     value={contacts}
-                                    onChange={(e) => setContacts(e.target.value)}
+                                    // LA CORRECTION SE TROUVE ICI
+                                    onChange={(e) => setContacts(e.target.value.replace(/[^0-9]/g, ''))}
                                     className="w-2/3 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                     required
                                 />

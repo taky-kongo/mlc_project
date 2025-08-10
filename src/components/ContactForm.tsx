@@ -256,7 +256,7 @@ const ContactForm: React.FC = () => {
                                         id="phone"
                                         className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-md sm:rounded-l-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#3a75ff] mt-2 sm:mt-0"
                                         value={contacts}
-                                        onChange={(e) => setContacts(e.target.value)}
+                                        onChange={(e) => setContacts(e.target.value.replace(/[^0-9]/g, ''))}
                                         required
                                     />
                                 </div>
