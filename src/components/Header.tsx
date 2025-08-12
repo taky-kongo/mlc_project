@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
                         onClick={onOpenModal}
                         className="bg-[#3a75ff] text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
                     >
-                        Nous rejoindre
+                        Je veux investir
                     </button>
                 </nav>
 
