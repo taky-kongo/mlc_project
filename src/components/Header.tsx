@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 import React, { useState } from 'react';
-import logo from '/img/logo_mlc.jpg'; // Assurez-vous d'avoir votre logo dans ce chemin
+import logo from '/img/logo_mlc.png'; // Assurez-vous d'avoir votre logo dans ce chemin
 
 // Définition des props pour le composant Header
 interface HeaderProps {
