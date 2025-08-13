@@ -103,6 +103,8 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
     // États pour les messages
     const [submissionMessage, setSubmissionMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    // Nouvel état pour le loader
+    const [isLoading, setIsLoading] = useState(false);
 
     // États pour le formulaire
     const [nom, setNom] = useState('');
@@ -131,6 +133,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrorMessage('');
+        setIsLoading(true); // Début du chargement
 
         const formData = {
             nom: nom,
@@ -139,16 +142,12 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
         };
 
         try {
-            /*const response = await fetch(
-                "https://n8n-mtpk.onrender.com/webhook/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3",
-                {*/
             //const response = await fetch('http://localhost:8000/api/submit-form', {
             const response = await fetch('https://mon-back-mlc.onrender.com/api/submit-form', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData),
-                }
-            );
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
 
             if (response.ok) {
                 setSubmissionMessage("C'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !");
@@ -161,6 +160,8 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
         } catch (error) {
             setErrorMessage("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
             console.error("Erreur d'envoi du formulaire:", error);
+        } finally {
+            setIsLoading(false); // Fin du chargement, que ce soit un succès ou un échec
         }
     };
 
@@ -277,7 +278,6 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                                     type="tel"
                                     id="whatsapp"
                                     value={contacts}
-                                    // LA CORRECTION SE TROUVE ICI
                                     onChange={(e) => setContacts(e.target.value.replace(/[^0-9]/g, ''))}
                                     className="w-2/3 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#3a75ff] focus:border-[#3a75ff] text-gray-900"
                                     required
@@ -287,9 +287,20 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600 cursor-pointer"
+                            className="w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 hover:bg-blue-600 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+                            disabled={isLoading}
                         >
-                            Je m'inscris
+                            {isLoading ? (
+                                <>
+                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Envoi en cours...
+                                </>
+                            ) : (
+                                "Je m'inscris"
+                            )}
                         </button>
                     </form>
                 )}

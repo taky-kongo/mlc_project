@@ -1,8 +1,15 @@
 // src/components/ContactForm.tsx
 import React, { useState, useEffect, useRef } from 'react';
 
+// Je définis le type pour les pays pour plus de clarté
+interface Country {
+    code: string;
+    name: string;
+    flag: string;
+}
+
 // Liste étendue des pays pour la démonstration.
-const countries = [
+const countries: Country[] = [
     { code: '+1', name: 'États-Unis', flag: '🇺🇸' },
     { code: '+7', name: 'Russie', flag: '🇷🇺' },
     { code: '+20', name: 'Égypte', flag: '🇪🇬' },
@@ -35,7 +42,7 @@ const countries = [
     { code: '+94', name: 'Sri Lanka', flag: '🇱🇰' },
     { code: '+95', name: 'Myanmar', flag: '🇲🇲' },
     { code: '+98', name: 'Iran', flag: '🇮🇷' },
-    { code: '+212', name: 'Maroc', flag: '�🇦' },
+    { code: '+212', name: 'Maroc', flag: '🇲🇦' },
     { code: '+213', name: 'Algérie', flag: '🇩🇿' },
     { code: '+216', name: 'Tunisie', flag: '🇹🇳' },
     { code: '+220', name: 'Gambie', flag: '🇬🇲' },
@@ -85,22 +92,22 @@ const countries = [
 ];
 
 const ContactForm: React.FC = () => {
-    // Remplacez '33612345678' par votre numéro de téléphone (sans le + ou les espaces).
     const phoneNumberDisplay = '+225 05 54 76 90 17';
     const whatsappNumber = '2250554769017';
     const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
     // États du formulaire
     const [nom, setNom] = useState('');
-    const [contacts, setContacts] = useState(''); // Partie du numéro sans l'indicatif
+    const [contacts, setContacts] = useState('');
     const [email, setEmail] = useState('');
-    const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false); // Nouvel état pour le loader
 
     // États pour la recherche et la visibilité du dropdown
     const [searchQuery, setSearchQuery] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState(countries.find(c => c.code === '') || countries[0]);
+    const [selectedCountry, setSelectedCountry] = useState<Country>(countries.find(c => c.code === '+33') || countries[0]);
 
     // Référence pour détecter les clics en dehors du dropdown
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -116,7 +123,7 @@ const ContactForm: React.FC = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setIsDropdownOpen(false);
-                setSearchQuery(''); // Effacer la recherche à la fermeture
+                setSearchQuery('');
             }
         };
 
@@ -127,29 +134,28 @@ const ContactForm: React.FC = () => {
     }, [dropdownRef]);
 
     // Gérer la sélection d'un pays
-    const handleCountrySelect = (country: typeof countries[0]) => {
+    const handleCountrySelect = (country: Country) => {
         setSelectedCountry(country);
         setIsDropdownOpen(false);
-        setSearchQuery(''); // Effacer la recherche après sélection
+        setSearchQuery('');
     };
 
     // Gérer la soumission du formulaire
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmissionStatus('loading');
+        setIsLoading(true); // Début du chargement
+        setSubmissionStatus('idle'); // Réinitialiser le statut
         setMessage('');
 
         const formData = {
             nom: nom,
-            contacts: selectedCountry.code + contacts, // Combiner indicatif et numéro
+            contacts: selectedCountry.code + contacts,
             email,
         };
 
         try {
-
             console.log(formData);
-            // L'URL du webhook est maintenant directement utilisée ici
-            //const response = await fetch('https://n8n-mtpk.onrender.com/webhook/7bcba2bc-9dd2-49c5-902b-28170a5ec7f3', {
+            //const response = await fetch('http://localhost:8000/api/submit-form', {
             const response = await fetch('https://mon-back-mlc.onrender.com/api/submit-form', {
                 method: 'POST',
                 headers: {
@@ -158,16 +164,14 @@ const ContactForm: React.FC = () => {
                 body: JSON.stringify(formData),
             });
 
-            console.log(formData);
-
-            if (response.ok) {console.log(formData);
+            if (response.ok) {
+                console.log(formData);
                 setSubmissionStatus('success');
                 setMessage('C\'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !');
-                // Réinitialiser le formulaire
                 setNom('');
                 setContacts('');
                 setEmail('');
-                setSelectedCountry(countries.find(c => c.code === '+33') || countries[0]); // Réinitialiser le pays sélectionné
+                setSelectedCountry(countries.find(c => c.code === '+33') || countries[0]);
             } else {
                 setSubmissionStatus('error');
                 setMessage('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
@@ -176,6 +180,8 @@ const ContactForm: React.FC = () => {
             console.error('Erreur lors de la soumission du formulaire:', error);
             setSubmissionStatus('error');
             setMessage('Impossible de se connecter au serveur. Veuillez vérifier votre connexion.');
+        } finally {
+            setIsLoading(false); // Fin du chargement
         }
     };
 
@@ -275,12 +281,20 @@ const ContactForm: React.FC = () => {
                             </div>
                             <button
                                 type="submit"
-                                className={`w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer ${
-                                    submissionStatus === 'loading' ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
-                                }`}
-                                disabled={submissionStatus === 'loading'}
+                                className={`w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center`}
+                                disabled={isLoading}
                             >
-                                {submissionStatus === 'loading' ? 'Envoi en cours...' : 'Envoyer'}
+                                {isLoading ? (
+                                    <>
+                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Envoi en cours...
+                                    </>
+                                ) : (
+                                    "Envoyer"
+                                )}
                             </button>
                             {message && (
                                 <p className={`text-center mt-4 ${submissionStatus === 'success' ? 'text-green-600' : 'text-red-600'}`}>
