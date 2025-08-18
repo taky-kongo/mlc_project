@@ -16,7 +16,8 @@ const AdminLogin: React.FC = () => {
 
         try {
             // L'URL de votre endpoint de connexion
-            const response = await fetch('http://127.0.0.1:8000/admin/login', {
+            //const response = await fetch('http://127.0.0.1:8000/admin/login', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/api/admin/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

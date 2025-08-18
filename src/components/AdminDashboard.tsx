@@ -30,7 +30,8 @@ const AdminDashboard: React.FC = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('http://127.0.0.1:8000/admin', {
+            //const response = await fetch('http://127.0.0.1:8000/admin', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/api/admin', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
