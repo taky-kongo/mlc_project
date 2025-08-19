@@ -1,7 +1,5 @@
 // src/components/DashboardHeader.tsx
-
-import React from "react";
-import { Bell, LogOut, Search, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function DashboardHeader() {

@@ -1,8 +1,8 @@
 // src/components/Sidebar.tsx
 
-import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, Menu, X, UserRoundCog } from 'lucide-react';
+import {useState} from "react";
 
 interface SidebarProps {
   className?: string;

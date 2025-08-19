@@ -1,8 +1,7 @@
 // src/components/UserProfilePage.tsx
 
 import React, { useState } from 'react';
-import { User, Mail, Lock, Save, ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { User, Mail, Lock, Save } from 'lucide-react';
 
 interface UserProfile {
   name: string;
@@ -10,7 +9,7 @@ interface UserProfile {
 }
 
 export function UserProfilePage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   // Utiliser un état pour les données du profil (ici, des données de démo)
   const [profileData, setProfileData] = useState<UserProfile>({

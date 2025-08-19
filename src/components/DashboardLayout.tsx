@@ -1,6 +1,4 @@
 // src/components/DashboardLayout.tsx
-
-import React from "react"
 import { Outlet } from "react-router-dom"
 import  Sidebar  from "./Sidebar"
 import { DashboardHeader } from "./DashboardHearder"
