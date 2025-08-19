@@ -17,7 +17,7 @@ const AdminLogin: React.FC = () => {
         try {
             // L'URL de votre endpoint de connexion
             //const response = await fetch('http://127.0.0.1:8000/admin/login', {
-            const response = await fetch('https://mon-back-mlc.onrender.com/admin/login', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const AdminLogin: React.FC = () => {
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('isAuthenticated', 'true');
 
-                navigate('/admin');
+                navigate('/admin/dashboard'); // Redirection vers le dashboard après connexion réussie
             } else {
                 setError('Nom d\'utilisateur ou mot de passe incorrect.');
             }

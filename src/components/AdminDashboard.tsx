@@ -1,6 +1,7 @@
 // src/components/AdminDashboard.tsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Users, TrendingUp, DollarSign, Target } from "lucide-react";
 
 interface UserData {
     // Les champs doivent correspondre exactement à la casse de votre backend
@@ -10,6 +11,38 @@ interface UserData {
     // J'ai laissé ce champ mais l'ai rendu optionnel car il n'est pas dans la réponse API
     date?: string;
 }
+
+const stats = [
+  {
+    title: "Total Prospects",
+    value: "2,345",
+    change: "+12%",
+    icon: Users,
+    color: "text-blue-600",
+  },
+  {
+    title: "Conversions",
+    value: "145",
+    change: "+8%",
+    icon: TrendingUp,
+    color: "text-green-600",
+  },
+  {
+    title: "Revenus",
+    value: "€45,231",
+    change: "+23%",
+    icon: DollarSign,
+    color: "text-purple-600",
+  },
+  {
+    title: "Taux de conversion",
+    value: "6.2%",
+    change: "+2%",
+    icon: Target,
+    color: "text-orange-600",
+  },
+];
+
 
 const AdminDashboard: React.FC = () => {
     const [users, setUsers] = useState<UserData[]>([]);
@@ -89,46 +122,23 @@ const AdminDashboard: React.FC = () => {
     }
 
     return (
-        <div className="container mx-auto p-6">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold text-gray-800">Tableau de bord administrateur</h1>
-                <button onClick={handleLogout} className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                    Déconnexion
-                </button>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+            // Remplacement du composant Card par une div stylisée
+            <div key={stat.title} className="bg-white rounded-lg shadow p-6">
+                <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <h3 className="text-sm font-medium text-gray-500">{stat.title}</h3>
+                <Icon className={`h-4 w-4 ${stat.color}`} />
+                </div>
+                <div>
+                <div className="text-2xl font-bold mt-2">{stat.value}</div>
+                <p className="text-xs text-green-600 font-medium mt-1">{stat.change} par rapport au mois dernier</p>
+                </div>
             </div>
-
-            <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                    <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nom et Prénom
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            E-mail
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Contact
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Date d'inscription
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            {/* Les champs sont maintenant en majuscules pour correspondre au backend */}
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.Nom}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.Email}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.Contacts}</td>
-                            {/* Affiche la date si le champ est présent, sinon une cellule vide */}
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.date || 'N/A'}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+            );
+        })}
         </div>
     );
 };

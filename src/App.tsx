@@ -1,5 +1,5 @@
 // src/App.tsx
-import {useState, useEffect, type JSX} from 'react';
+import { useState, useEffect, type JSX } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Composants de la page d'accueil
@@ -17,19 +17,21 @@ import TimedModal from './components/TimedModal';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 
+// Composants de la nouvelle structure du dashboard
+import DashboardLayout from './components/DashboardLayout';
+import ProspectsPage from './components/ProspectsPage';
+import UserProfilePage from './components/UserProfilePage';
+
+
 // Composant pour la page d'accueil, regroupant tous les éléments publics
 const HomePage = () => {
-    // État central pour contrôler l'affichage de la modale
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Fonction pour fermer la modale
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
 
-    // Logique du timer de 10 secondes (30 secondes dans l'ancienne version, j'ai conservé 10s de la correction précédente)
     useEffect(() => {
-        // On vérifie si l'utilisateur est déjà inscrit pour ne pas afficher la modale
         const userRegistered = localStorage.getItem('user_registration_data');
         if (userRegistered) {
             return;
@@ -42,7 +44,6 @@ const HomePage = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    // Fonction pour ouvrir la modale, à passer aux autres composants
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -63,8 +64,6 @@ const HomePage = () => {
 };
 
 // Composant pour protéger l'accès à une route
-// Il vérifie si l'utilisateur est authentifié. Si oui, il affiche la page demandée (children),
-// sinon il le redirige vers la page de login.
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     return isAuthenticated ? children : <Navigate to="/admin/login" replace />;
@@ -80,15 +79,19 @@ const App = () => {
                 {/* Route pour le formulaire de connexion admin */}
                 <Route path="/admin/login" element={<AdminLogin />} />
 
-                {/* Route protégée pour le dashboard admin */}
+                {/* Route protégée pour le dashboard et toutes ses sous-pages */}
                 <Route
                     path="/admin"
                     element={
                         <ProtectedRoute>
-                            <AdminDashboard />
+                            <DashboardLayout />
                         </ProtectedRoute>
                     }
-                />
+                >
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                    <Route path="prospects" element={<ProspectsPage />} />
+                    <Route path="profile" element={<UserProfilePage />} />
+                </Route>
             </Routes>
         </Router>
     );
