@@ -34,7 +34,7 @@ const AdminLogin: React.FC = () => {
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('isAuthenticated', 'true');
 
-                navigate('/admin/dashboard'); // Redirection vers le dashboard après connexion réussie
+                navigate('/admin/prospects'); // Redirection vers le dashboard après connexion réussie
             } else {
                 setError('Nom d\'utilisateur ou mot de passe incorrect.');
             }

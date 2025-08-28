@@ -1,7 +1,7 @@
 // src/components/Sidebar.tsx
 
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Menu, X, UserRoundCog } from 'lucide-react';
+import { Users, Menu, X } from 'lucide-react';
 import {useState} from "react";
 
 interface SidebarProps {
@@ -9,9 +9,9 @@ interface SidebarProps {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+  //{ name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
   { name: 'Prospects', href: '/admin/prospects', icon: Users },
-  { name: 'Mon compte', href: '/admin/profile', icon: UserRoundCog },
+  //{ name: 'Mon compte', href: '/admin/profile', icon: UserRoundCog },
 
 ];
 
