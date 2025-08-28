@@ -50,7 +50,7 @@ export default function ProspectsPage() {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('https://mon-back-mlc.onrender.com/prospects', {
+            const response = await fetch('https://api.mlc.ci/prospects', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

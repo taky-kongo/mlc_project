@@ -64,7 +64,7 @@ const AdminDashboard: React.FC = () => {
         setError('');
         try {
             //const response = await fetch('http://127.0.0.1:8000/admin', {
-            const response = await fetch('https://mon-back-mlc.onrender.com/admin', {
+            const response = await fetch('https://api.mlc.ci/admin', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
