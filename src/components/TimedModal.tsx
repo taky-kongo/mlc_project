@@ -148,13 +148,21 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
+            if (!response.ok) {
+                setErrorMessage("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+                console.error("Échec de l'envoi du formulaire", response.statusText);
+                return;
+            }
 
-            if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            if (data.status_code === 201) {
                 setSubmissionMessage("C'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !");
                 setView('success');
                 localStorage.setItem('user_registration_data', JSON.stringify(formData));
-            } else {
-                setErrorMessage("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+            } else if (data.status_code === 409) {
+                setErrorMessage("L'email est déjà utilisé. Veuillez en utiliser un autre.");
                 console.error("Échec de l'envoi du formulaire", response.statusText);
             }
         } catch (error) {
