@@ -167,7 +167,7 @@ const ContactForm: React.FC = () => {
             if (response.ok) {
                 console.log(formData);
                 setSubmissionStatus('success');
-                setMessage('C\'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !');
+                setMessage('C\'est parfait ! Vous recevrez un e-mail avec les prochaines étapes à suivre. Merci !');
                 setNom('');
                 setContacts('');
                 setEmail('');

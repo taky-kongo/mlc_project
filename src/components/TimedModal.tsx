@@ -158,7 +158,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
             console.log(data);
 
             if (data.status_code === 201) {
-                setSubmissionMessage("C'est parfait ! Vous recevrez un message WhatsApp et un e-mail avec les prochaines étapes à suivre. Merci !");
+                setSubmissionMessage("C'est parfait ! Vous recevrez un e-mail avec les prochaines étapes à suivre. Merci !");
                 setView('success');
                 localStorage.setItem('user_registration_data', JSON.stringify(formData));
             } else if (data.status_code === 409) {
