@@ -1,5 +1,6 @@
 // src/components/ContactForm.tsx
 import React, { useState, useEffect, useRef } from 'react';
+import { FaWhatsapp } from "react-icons/fa";
 
 // Je définis le type pour les pays pour plus de clarté
 interface Country {
@@ -92,8 +93,8 @@ const countries: Country[] = [
 ];
 
 const ContactForm: React.FC = () => {
-    const phoneNumberDisplay = '+225 05 54 76 90 17';
-    const whatsappNumber = '2250554769017';
+    const phoneNumberDisplay = '+225 07 07 08 96 31';
+    const whatsappNumber = '2250707089631';
     const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
     // États du formulaire
@@ -320,9 +321,7 @@ const ContactForm: React.FC = () => {
 
                         <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
                             <div className="bg-green-500 p-3 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12.04 2a10 10 0 00-9.87 11.23l-1.3 4.72a1 1 0 001.27 1.27l4.72-1.3A10 10 0 1012.04 2zm4.8 14.54a2.9 2.9 0 01-4.11 0l-2.07-2.07a.64.64 0 01-.16-.39.67.67 0 01.16-.39l1.1-1.1a.64.64 0 01.91 0l.44.44a.64.64 0 00.91 0l2.37-2.37a.64.64 0 000-.91l-.44-.44a.64.64 0 010-.91l1.1-1.1a.64.64 0 01.39-.16.67.67 0 01.39.16l2.07 2.07a2.9 2.9 0 010 4.11L16.84 16.54z" />
-                                </svg>
+                                <FaWhatsapp className="h-6 w-6 text-white" />
                             </div>
                             <p className="text-lg font-semibold text-gray-800">Contactez-nous sur WhatsApp</p>
                         </a>
