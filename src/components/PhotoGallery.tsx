@@ -13,6 +13,10 @@ const PhotoGallery: React.FC = () => {
         { src: "/img/galerie/photo4.jpeg", alt: "Description Photo 4" },
         { src: "/img/galerie/phoyo5.jpeg", alt: "Description Photo 5" },
         { src: "/img/galerie/photo6.jpeg", alt: "Description Photo 6" },
+        { src: "/img/galerie/photo07.jpg", alt: "Description Photo 7" },
+        { src: "/img/galerie/photo08.jpg", alt: "Description Photo 8" },
+        { src: "/img/galerie/photo09.jpg", alt: "Description Photo 9" },
+        { src: "/img/galerie/photo10.jpg", alt: "Description Photo 10" },
     ];
 
     // Effet pour la transition d'apparition de la section
