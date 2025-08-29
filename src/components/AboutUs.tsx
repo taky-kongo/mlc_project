@@ -1,7 +1,9 @@
 // src/components/AboutUs.tsx
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const AboutUs: React.FC = () => {
+    const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -12,14 +14,9 @@ const AboutUs: React.FC = () => {
                     if (entry.isIntersecting) {
                         setIsVisible(true);
                     }
-                    // Si vous voulez que l'animation se réinitialise lorsque l'élément quitte l'écran,
-                    // décommentez la ligne ci-dessous:
-                    // else {
-                    //   setIsVisible(false);
-                    // }
                 });
             },
-            { threshold: 0.1 } // Déclenche l'animation lorsque 10% de la section est visible
+            { threshold: 0.1 }
         );
 
         if (sectionRef.current) {
@@ -42,11 +39,14 @@ const AboutUs: React.FC = () => {
             }`}
         >
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-4xl font-bold mb-4">Qui sommes-nous ?</h2>
-                <h3 className="text-3xl font-semibold text-[#3a75ff] mb-8">MLC Engineering</h3>
+                <h2 className="text-4xl font-bold mb-4">
+                    {t('aboutUsPage.title')}
+                </h2>
+                <h3 className="text-3xl font-semibold text-[#3a75ff] mb-8">
+                    {t('aboutUsPage.subtitle')}
+                </h3>
                 <p className="text-lg max-w-3xl mx-auto mb-16 text-gray-300">
-                    Est une société d'ingénierie spécialisée dans la création et la mise sur le marché international
-                    d'un système de surveillance continue de la glycémie.
+                    {t('aboutUsPage.paragraph1')}
                 </p>
 
                 <div className="grid md:grid-cols-3 gap-12">
@@ -58,7 +58,7 @@ const AboutUs: React.FC = () => {
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
                         <p className="text-lg font-semibold text-gray-200">
-                            Offre aux investisseurs choisissez le montant d'investissement. Le montant d'investissements est compris entre 100 et 2 000 000 dollars.
+                            {t('aboutUsPage.image1Caption')}
                         </p>
                     </div>
 
@@ -70,7 +70,7 @@ const AboutUs: React.FC = () => {
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
                         <p className="text-lg font-semibold text-gray-200">
-                            Un certificat vous sera donné à la fin de vos investissements dans le projet, un document qui prouve que vous détenez des parts de la société MLC avant son entrée en bourse (IPO) en 2030.
+                            {t('aboutUsPage.image2Caption')}
                         </p>
                     </div>
 
@@ -82,7 +82,7 @@ const AboutUs: React.FC = () => {
                             className="rounded-lg shadow-lg mb-4 w-full h-auto object-cover"
                         />
                         <p className="text-lg font-semibold text-gray-200">
-                            Notre offre est le premier but du projet, il y a 537 millions de consommateurs potentiels sur notre planète, et nous allons augmenter nos ventes d'année en année.
+                            {t('aboutUsPage.image3Caption')}
                         </p>
                     </div>
                 </div>

@@ -1,23 +1,23 @@
 // src/components/Benefits.tsx
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Benefits: React.FC = () => {
+    const { t } = useTranslation();
     const benefits = [
-        "Opportunités de croissance",
-        "Simplicité et clarté",
-        "Soutien de la communauté",
-        "Transparence totale",
+        t('benefitsPage.benefitsList.0'),
+        t('benefitsPage.benefitsList.1'),
+        t('benefitsPage.benefitsList.2'),
+        t('benefitsPage.benefitsList.3')
     ];
     // Remplacez cette URL par l'URL de votre vidéo de présentation.
-    // Utilisez un format compatible avec le web (ex: .mp4, .webm) ou un lien de partage YouTube valide.
-    // Les liens "blob:https://www.youtube.com/..." sont temporaires et ne fonctionneront pas ici.
-    const videoUrl = "/img/presentation_mlc.mp4"; // Exemple : remplacez par votre lien valide
+    const videoUrl = "/img/presentation_mlc.mp4";
 
     return (
         <section id="benefits" className="bg-gray-100 py-20">
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-                    Les avantages de rejoindre le projet <span className="text-[#3a75ff]">MLC</span>
+                    {t('benefitsPage.title')}
                 </h2>
                 <ul className="grid md:grid-cols-2 gap-8 text-lg max-w-4xl mx-auto mb-16">
                     {benefits.map((benefit, index) => (
@@ -30,9 +30,10 @@ const Benefits: React.FC = () => {
 
                 {/* Section de la vidéo de présentation */}
                 <div className="text-center mb-12">
-                    <h3 className="text-3xl font-bold text-gray-800 mb-8">SOYONS TOUS PARTENAIRE MLC</h3>
-                    {/* Le cadre de la vidéo a été élargi à max-w-6xl */}
-                    <div className="relative w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl" style={{ paddingTop: '56.25%' }}> {/* Ratio 16:9 */}
+                    <h3 className="text-3xl font-bold text-gray-800 mb-8">
+                        {t('benefitsPage.videoSubtitle')}
+                    </h3>
+                    <div className="relative w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl" style={{ paddingTop: '56.25%' }}>
                         <video
                             className="absolute top-0 left-0 w-full h-full object-cover"
                             controls
@@ -41,12 +42,12 @@ const Benefits: React.FC = () => {
                             src={videoUrl}
                             aria-label="Vidéo de présentation du projet MLC"
                         >
-                            Votre navigateur ne supporte pas la lecture de vidéos.
+                            {t('benefitsPage.unsupportedVideo')}
                         </video>
                     </div>
                     {/* Nouveau texte ajouté sous la vidéo */}
                     <p className="text-lg text-gray-600 mt-8">
-                        Investir dans la santé signifie toujours un investissement dans un avenir meilleur.
+                        {t('benefitsPage.videoMessage')}
                     </p>
                 </div>
             </div>
