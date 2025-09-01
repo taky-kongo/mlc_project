@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 //import { useTranslation } from 'react-i18next';
 
 const PhotoGallery: React.FC = () => {
-    {/*const { t } = useTranslation();*/}
+    //const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
     // eslint-disable-next-line no-empty-pattern
     const [isScrollingPaused, {/*setIsScrollingPaused*/}] = useState(false); // Nouvel état pour mettre en pause le défilement
