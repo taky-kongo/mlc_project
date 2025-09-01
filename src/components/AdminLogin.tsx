@@ -1,8 +1,11 @@
 // src/components/AdminLogin.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const AdminLogin: React.FC = () => {
+    const { t } = useTranslation();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,7 +19,6 @@ const AdminLogin: React.FC = () => {
 
         try {
             // L'URL de votre endpoint de connexion
-            //const response = await fetch('http://127.0.0.1:8000/admin/login', {
             const response = await fetch('https://api.mlc.ci/login', {
                 method: 'POST',
                 headers: {
@@ -26,20 +28,18 @@ const AdminLogin: React.FC = () => {
             });
 
             if (response.ok) {
-                // Le backend renvoie le JWT dans le corps de la réponse JSON
                 const data = await response.json();
-                const jwtToken = data.access_token; // Assurez-vous que la clé correspond à votre backend (ex: 'token', 'jwt', 'accessToken')
+                const jwtToken = data.access_token;
 
-                // Stockage du JWT et de l'état d'authentification
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('isAuthenticated', 'true');
 
-                navigate('/admin/prospects'); // Redirection vers le dashboard après connexion réussie
+                navigate('/admin/prospects');
             } else {
-                setError('Nom d\'utilisateur ou mot de passe incorrect.');
+                setError(t('loginPage.errorCredentials'));
             }
         } catch (err) {
-            setError('Impossible de se connecter au serveur. Veuillez vérifier votre connexion.');
+            setError(t('loginPage.errorServer'));
         } finally {
             setIsLoading(false);
         }
@@ -48,11 +48,15 @@ const AdminLogin: React.FC = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
-                <h2 className="text-3xl font-bold text-center text-gray-800">Accès administrateur</h2>
+                <h2 className="text-3xl font-bold text-center text-gray-800">
+                    {t('loginPage.title')}
+                </h2>
                 <form className="space-y-4" onSubmit={handleLogin}>
                     {error && <p className="text-center text-red-500">{error}</p>}
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                            {t('loginPage.usernameLabel')}
+                        </label>
                         <input
                             type="text"
                             id="username"
@@ -63,7 +67,9 @@ const AdminLogin: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            {t('loginPage.passwordLabel')}
+                        </label>
                         <input
                             type="password"
                             id="password"
@@ -84,10 +90,10 @@ const AdminLogin: React.FC = () => {
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                Connexion...
+                                {t('loginPage.connecting')}
                             </>
                         ) : (
-                            'Se connecter'
+                            t('loginPage.loginButton')
                         )}
                     </button>
                 </form>

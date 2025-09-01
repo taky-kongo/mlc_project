@@ -1,11 +1,12 @@
 // src/components/HowItWorks.tsx
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import fonctionnementImg from '/img/fonctionnement.png'; // Import de l'image
 
 const HowItWorks: React.FC = () => {
+    const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
-    // État pour gérer l'erreur de chargement de l'image
     const [imageError, setImageError] = useState(false);
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const HowItWorks: React.FC = () => {
                     }
                 });
             },
-            { threshold: 0.1 } // Déclenche l'animation lorsque 10% de la section est visible
+            { threshold: 0.1 }
         );
 
         if (sectionRef.current) {
@@ -31,11 +32,13 @@ const HowItWorks: React.FC = () => {
         };
     }, []);
 
+    // Structure des étapes basée sur les clés de traduction
     const steps = [
-        { title: "Inscrivez-vous et rejoignez notre groupe", description: "En un seul clic, accédez à toutes les informations et à notre communauté de membres." },
-        { title: "Explorez les packs d'investissement", description: "Une fois dans votre back-office, découvrez les différentes options qui s'offrent à vous." },
-        { title: "Investissez et suivez vos progrès", description: "Choisissez le pack qui vous convient le mieux et commencez à construire votre avenir financier." }
+        { title: t('howItWorks.step1Title'), description: t('howItWorks.step1Description') },
+        { title: t('howItWorks.step2Title'), description: t('howItWorks.step2Description') },
+        { title: t('howItWorks.step3Title'), description: t('howItWorks.step3Description') }
     ];
+
     return (
         <section
             id="how-it-works"
@@ -46,7 +49,7 @@ const HowItWorks: React.FC = () => {
         >
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-                    Comment ça marche ?
+                    {t('howItWorks.title')}
                 </h2>
                 <div className="grid md:grid-cols-3 gap-10">
                     {steps.map((step, index) => (
@@ -58,14 +61,12 @@ const HowItWorks: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Nouvelle image ajoutée sous les cadres */}
                 <div className="mt-16 text-center">
                     <img
-                        // Utilise l'image importée ou une image de remplacement en cas d'erreur
                         src={imageError ? "https://placehold.co/1024x576/cccccc/333333?text=Image+non+trouvée" : fonctionnementImg}
-                        alt="Fonctionnement du projet"
+                        alt={t('howItWorks.title')}
                         className="w-full max-w-5xl mx-auto rounded-lg shadow-xl object-cover"
-                        onError={() => setImageError(true)} // Définit l'état d'erreur si l'image ne charge pas
+                        onError={() => setImageError(true)}
                     />
                 </div>
             </div>
