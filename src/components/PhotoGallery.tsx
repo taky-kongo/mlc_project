@@ -1,11 +1,12 @@
 // src/components/PhotoGallery.tsx
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+//import { useTranslation } from 'react-i18next';
 
 const PhotoGallery: React.FC = () => {
-    const { t } = useTranslation();
+    {/*const { t } = useTranslation();*/}
     const [isVisible, setIsVisible] = useState(false);
-    const [isScrollingPaused, setIsScrollingPaused] = useState(false); // Nouvel état pour mettre en pause le défilement
+    // eslint-disable-next-line no-empty-pattern
+    const [isScrollingPaused, {/*setIsScrollingPaused*/}] = useState(false); // Nouvel état pour mettre en pause le défilement
     const sectionRef = useRef<HTMLElement>(null);
     const photoCarouselRef = useRef<HTMLDivElement>(null);
     const videoCarouselRef = useRef<HTMLDivElement>(null);
