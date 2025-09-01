@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 const PhotoGallery: React.FC = () => {
     const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
+    const [isScrollingPaused, setIsScrollingPaused] = useState(false); // Nouvel état pour mettre en pause le défilement
     const sectionRef = useRef<HTMLElement>(null);
     const photoCarouselRef = useRef<HTMLDivElement>(null);
     const videoCarouselRef = useRef<HTMLDivElement>(null);
@@ -22,13 +23,11 @@ const PhotoGallery: React.FC = () => {
         { src: "/img/galerie/photo10.jpg", alt: "Description Photo 10" },
     ];
 
-    // Liste des vidéos avec les identifiants Vimeo
-    // Remplacez '123456789' par l'ID de votre vidéo Vimeo
-    const videos = [
+    {/*const videos = [
         { id: "1114323603", title: "Vidéo 1" },
         { id: "1114860207", title: "Vidéo 2" },
         { id: "1114862260", title: "Vidéo 3" },
-    ];
+    ];*/}
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -105,7 +104,8 @@ const PhotoGallery: React.FC = () => {
 
     useEffect(() => {
         let videoInterval: NodeJS.Timeout;
-        if (isVisible) {
+        // Le carrousel vidéo ne défile que si la section est visible ET que le défilement n'est pas en pause
+        if (isVisible && !isScrollingPaused) {
             videoInterval = setInterval(() => {
                 if (videoCarouselRef.current) {
                     const { scrollWidth, clientWidth, scrollLeft } = videoCarouselRef.current;
@@ -125,7 +125,7 @@ const PhotoGallery: React.FC = () => {
                 clearInterval(videoInterval);
             }
         };
-    }, [isVisible]);
+    }, [isVisible, isScrollingPaused]); // Dépend de isScrollingPaused
 
     return (
         <section
@@ -136,7 +136,8 @@ const PhotoGallery: React.FC = () => {
             }`}
         >
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-4xl font-bold mb-12">{t('photoGallery.title')}</h2>
+                {/*<h2 className="text-4xl font-bold mb-12">{t('photoGallery.title')}</h2>*/}
+                <h2 className="text-4xl font-bold mb-12">Notre galerie photo</h2>
                 <div className="relative mb-20">
                     <button
                         onClick={() => scrollPhotoCarousel('left')}
@@ -172,7 +173,7 @@ const PhotoGallery: React.FC = () => {
                     </div>
                 </div>
 
-                <h2 className="text-4xl font-bold mb-12">{t('videoGallery.title')}</h2>
+                {/*<h2 className="text-4xl font-bold mb-12">{t('videoGallery.title')}</h2>
                 <div className="relative">
                     <button
                         onClick={() => scrollVideoCarousel('left')}
@@ -197,8 +198,12 @@ const PhotoGallery: React.FC = () => {
                         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 hide-scrollbar"
                     >
                         {videos.map((video, index) => (
-                            <div key={index} className="flex-shrink-0 w-full md:w-1/2 lg:w-1/2 p-4 md:p-8">
-                                {/* Utilisation de l'iframe de Vimeo */}
+                            <div
+                                key={index}
+                                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/2 p-4 md:p-8"
+                                onMouseEnter={() => setIsScrollingPaused(true)} // Met en pause le défilement
+                                onMouseLeave={() => setIsScrollingPaused(false)} // Reprend le défilement
+                            >
                                 <div className="aspect-w-16 aspect-h-9 w-full h-72 rounded-lg overflow-hidden shadow-md">
                                     <iframe
                                         src={`https://player.vimeo.com/video/${video.id}?title=0&byline=0&portrait=0`}
@@ -212,7 +217,7 @@ const PhotoGallery: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div>*/}
             </div>
         </section>
     );
