@@ -1,21 +1,22 @@
 // src/components/PhotoGallery.tsx
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PhotoGallery: React.FC = () => {
+    const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
-    const carouselRef = useRef<HTMLDivElement>(null); // Référence pour le conteneur du carrousel
+    const carouselRef = useRef<HTMLDivElement>(null);
 
     const photos = [
-        { src: "/img/galerie/photo1.jpeg", alt: "Description Photo 1" },
-        { src: "/img/galerie/photo2.jpeg", alt: "Description Photo 2" },
-        { src: "/img/galerie/photo3.jpeg", alt: "Description Photo 3" },
-        { src: "/img/galerie/photo4.jpeg", alt: "Description Photo 4" },
-        { src: "/img/galerie/phoyo5.jpeg", alt: "Description Photo 5" },
-        { src: "/img/galerie/photo6.jpeg", alt: "Description Photo 6" },
+        { src: "/img/galerie/photo1.jpeg", alt: t('photoGallery.photoAlt') + "1" },
+        { src: "/img/galerie/photo2.jpeg", alt: t('photoGallery.photoAlt') + "2" },
+        { src: "/img/galerie/photo3.jpeg", alt: t('photoGallery.photoAlt') + "3" },
+        { src: "/img/galerie/photo4.jpeg", alt: t('photoGallery.photoAlt') + "4" },
+        { src: "/img/galerie/phoyo5.jpeg", alt: t('photoGallery.photoAlt') + "5" },
+        { src: "/img/galerie/photo6.jpeg", alt: t('photoGallery.photoAlt') + "6" },
     ];
 
-    // Effet pour la transition d'apparition de la section
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -25,7 +26,7 @@ const PhotoGallery: React.FC = () => {
                     }
                 });
             },
-            { threshold: 0.1 } // Déclenche l'animation lorsque 10% de la section est visible
+            { threshold: 0.1 }
         );
 
         if (sectionRef.current) {
@@ -39,12 +40,10 @@ const PhotoGallery: React.FC = () => {
         };
     }, []);
 
-    // Fonction pour faire défiler le carrousel
     const scrollCarousel = (direction: 'left' | 'right') => {
         if (carouselRef.current) {
-            // Défilement de la largeur d'une image pour un mouvement fluide
             const itemWidth = carouselRef.current.querySelector('.flex-shrink-0')?.clientWidth || 0;
-            const scrollAmount = itemWidth; // Défile d'une image à la fois
+            const scrollAmount = itemWidth;
 
             if (direction === 'left') {
                 carouselRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -54,33 +53,29 @@ const PhotoGallery: React.FC = () => {
         }
     };
 
-    // Effet pour le défilement automatique
     useEffect(() => {
         let interval: NodeJS.Timeout;
-        if (isVisible) { // Démarrer le défilement automatique seulement si la section est visible
+        if (isVisible) {
             interval = setInterval(() => {
                 if (carouselRef.current) {
-                    // Vérifier si nous sommes à la fin du carrousel
                     const { scrollWidth, clientWidth, scrollLeft } = carouselRef.current;
                     const isAtEnd = scrollLeft + clientWidth >= scrollWidth;
 
                     if (isAtEnd) {
-                        // Revenir au début en douceur
                         carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                     } else {
-                        // Défiler vers la droite
                         scrollCarousel('right');
                     }
                 }
-            }, 3000); // Défilement toutes les 3 secondes
+            }, 3000);
         }
 
         return () => {
             if (interval) {
-                clearInterval(interval); // Nettoyer l'intervalle lors du démontage du composant ou si isVisible devient false
+                clearInterval(interval);
             }
         };
-    }, [isVisible]); // Dépend du fait que la section soit visible
+    }, [isVisible]);
 
     return (
         <section
@@ -91,14 +86,14 @@ const PhotoGallery: React.FC = () => {
             }`}
         >
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-4xl font-bold mb-12">Notre Galerie Photo</h2>
+                <h2 className="text-4xl font-bold mb-12">{t('photoGallery.title')}</h2>
 
                 <div className="relative">
                     {/* Boutons de défilement */}
                     <button
                         onClick={() => scrollCarousel('left')}
                         className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-75 text-white p-3 rounded-full shadow-lg z-10 hover:bg-opacity-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
-                        aria-label="Faire défiler vers la gauche"
+                        aria-label={t('photoGallery.scrollLeft')}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -107,7 +102,7 @@ const PhotoGallery: React.FC = () => {
                     <button
                         onClick={() => scrollCarousel('right')}
                         className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-75 text-white p-3 rounded-full shadow-lg z-10 hover:bg-opacity-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
-                        aria-label="Faire défiler vers la droite"
+                        aria-label={t('photoGallery.scrollRight')}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -117,16 +112,13 @@ const PhotoGallery: React.FC = () => {
                     {/* Conteneur du carrousel */}
                     <div
                         ref={carouselRef}
-                        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 hide-scrollbar" // 'hide-scrollbar' pour masquer la barre de défilement native
+                        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 hide-scrollbar"
                     >
                         {photos.map((photo, index) => (
-                            // Ajustement de la largeur pour afficher 2 images par ligne sur les grands écrans (lg:w-1/2)
-                            // et augmentation de l'espacement (p-8)
                             <div key={index} className="flex-shrink-0 w-full md:w-1/2 lg:w-1/2 p-8">
                                 <img
                                     src={photo.src}
                                     alt={photo.alt}
-                                    // Augmentation de la hauteur des images
                                     className="w-full h-72 object-cover rounded-lg shadow-md"
                                 />
                             </div>

@@ -1,13 +1,15 @@
 // src/components/Header.tsx
 import React, { useState } from 'react';
-import logo from '/img/logo_mlc.png'; // Assurez-vous d'avoir votre logo dans ce chemin
+import { useTranslation } from 'react-i18next';
+import logo from '/img/logo_mlc.png';
+import LanguageSelector from './LanguageSelector'; // Importez le composant LanguageSelector
 
-// Définition des props pour le composant Header
 interface HeaderProps {
     onOpenModal: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
+    const { t } = useTranslation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -18,7 +20,6 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
         setIsMobileMenuOpen(false);
     };
 
-    // Gère l'ouverture de la modale et la fermeture du menu mobile
     const handleOpenModalClick = () => {
         onOpenModal();
         closeMobileMenu();
@@ -35,19 +36,20 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
                 {/* Navigation pour écrans larges (Desktop) */}
                 <nav className="hidden md:flex space-x-8 items-center">
                     <a href="#benefits" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
-                        Avantages
+                        {t('header.benefits')}
                     </a>
                     <a href="#how-it-works" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
-                        Fonctionnement
+                        {t('header.howItWorks')}
                     </a>
                     <a href="#about-us" className="text-gray-600 hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer">
-                        A propos
+                        {t('header.aboutUs')}
                     </a>
+                    <LanguageSelector /> {/* Sélecteur de langue pour les écrans larges */}
                     <button
                         onClick={onOpenModal}
                         className="bg-[#3a75ff] text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
                     >
-                        Je veux investir
+                        {t('header.invest')}
                     </button>
                 </nav>
 
@@ -106,32 +108,35 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
                     </button>
                 </div>
                 <nav className="flex flex-col items-center space-y-8 mt-12">
+                    <div className="w-32">
+                        <LanguageSelector /> {/* Sélecteur de langue pour le menu mobile */}
+                    </div>
                     <a
                         href="#benefits"
                         className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
-                        Avantages
+                        {t('header.benefits')}
                     </a>
                     <a
                         href="#how-it-works"
                         className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
-                        Fonctionnement
+                        {t('header.howItWorks')}
                     </a>
                     <a
                         href="#about-us"
                         className="text-gray-800 text-xl font-semibold hover:text-[#3a75ff] transition-colors duration-300 cursor-pointer"
                         onClick={closeMobileMenu}
                     >
-                        A propos
+                        {t('header.aboutUs')}
                     </a>
                     <button
                         onClick={handleOpenModalClick}
                         className="bg-[#3a75ff] text-white px-6 py-3 rounded-full font-bold text-xl hover:bg-blue-600 transition-colors duration-300 w-fit cursor-pointer"
                     >
-                        Nous rejoindre
+                        {t('header.joinUs')}
                     </button>
                 </nav>
             </div>

@@ -4,22 +4,20 @@ import React, { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { useTranslation } from "react-i18next"; // Import du hook de traduction
 
 interface Prospect {
     id: string;
     nom: string;
     email: string;
     contacts: string;
-//   company: string;
-//   status: "nouveau" | "contacté" | "qualifié" | "converti";
 }
 
 export default function ProspectsPage() {
-
+    const { t } = useTranslation();
     const [prospects, setProspects] = useState<Prospect[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // J'ai augmenté la valeur pour un affichage plus réaliste
-
+    const itemsPerPage = 10;
     const totalPages = Math.ceil(prospects.length / itemsPerPage);
     const paginatedProspects = prospects.slice(
         (currentPage - 1) * itemsPerPage,
@@ -60,23 +58,21 @@ export default function ProspectsPage() {
 
             if (response.ok) {
                 const responseData = await response.json();
-
-                // La réponse de l'API est correcte, on peut directement utiliser la clé 'items'
                 if (Array.isArray(responseData?.items)) {
                     setProspects(responseData.items);
                 } else {
                     console.error("Le format de données de l'API est incorrect. La clé 'items' n'est pas un tableau.");
-                    setError("Erreur : Le format de données de l'API est incorrect.");
+                    setError(t('prospectsPage.errorFormat'));
                 }
             } else if (response.status === 401 || response.status === 403) {
                 console.error("Erreur d'authentification. Redirection vers la page de connexion.");
                 handleLogout();
             } else {
-                setError(`Erreur lors de la récupération des données : ${response.statusText}`);
+                setError(`${t('prospectsPage.errorApi')}${response.statusText}`);
             }
         } catch (err) {
             console.error('Erreur de connexion à l\'API :', err);
-            setError(`Impossible de se connecter à l'API. Erreur: ${err instanceof Error ? err.message : String(err)}`);
+            setError(`${t('prospectsPage.errorConnection')}${err instanceof Error ? err.message : String(err)}`);
         } finally {
             setLoading(false);
         }
@@ -93,7 +89,7 @@ export default function ProspectsPage() {
     };
 
     if (loading) {
-        return <div className="text-center mt-20">Chargement des données...</div>;
+        return <div className="text-center mt-20">{t('prospectsPage.loading')}</div>;
     }
 
     if (error) {
@@ -103,10 +99,10 @@ export default function ProspectsPage() {
     if (prospects.length === 0) {
         return (
             <div className="container mx-auto p-6 text-center">
-                <h1 className="text-3xl font-bold text-gray-800 mb-6">Tableau de bord administrateur</h1>
-                <p className="text-gray-500">Aucune inscription trouvée.</p>
+                <h1 className="text-3xl font-bold text-gray-800 mb-6">{t('prospectsPage.listTitle')}</h1>
+                <p className="text-gray-500">{t('prospectsPage.noProspects')}</p>
                 <button onClick={handleLogout} className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                    Déconnexion
+                    {t('prospectsPage.logout')}
                 </button>
             </div>
         );
@@ -119,13 +115,11 @@ export default function ProspectsPage() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const newId = Math.random().toString(36).substring(2, 9); // Générer un ID unique
+        const newId = Math.random().toString(36).substring(2, 9);
 
         if (editingProspect) {
-            // Update existing prospect
             setProspects(prospects.map((p) => (p.id === editingProspect.id ? { ...p, ...formData } : p)));
         } else {
-            // Add new prospect
             const newProspect: Prospect = {
                 id: newId,
                 nom: formData.name,
@@ -166,8 +160,8 @@ export default function ProspectsPage() {
         <div className="space-y-6 p-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Prospects</h1>
-                    <p className="text-gray-500">Gérez vos prospects et suivez leur progression</p>
+                    <h1 className="text-3xl font-bold tracking-tight">{t('prospectsPage.title')}</h1>
+                    <p className="text-gray-500">{t('prospectsPage.subtitle')}</p>
                 </div>
 
                 <button
@@ -178,22 +172,22 @@ export default function ProspectsPage() {
                     className="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center hover:bg-blue-700 transition-colors"
                 >
                     <Plus className="mr-2 h-4 w-4" />
-                    Ajouter un prospect
+                    {t('prospectsPage.addProspect')}
                 </button>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold mb-2">Liste des prospects</h2>
+                <h2 className="text-2xl font-bold mb-2">{t('prospectsPage.listTitle')}</h2>
                 <p className="text-gray-500 mb-6">
-                    {prospects.length} prospect{prospects.length > 1 ? "s" : ""} au total
+                    {t('prospectsPage.totalProspects', { count: prospects.length })}
                 </p>
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                         <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Téléphone</th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('prospectsPage.tableHeaderName')}</th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('prospectsPage.tableHeaderEmail')}</th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('prospectsPage.tableHeaderPhone')}</th>
                             <th scope="col" className="relative px-6 py-3"><span className="sr-only">Actions</span></th>
                         </tr>
                         </thead>
@@ -208,14 +202,14 @@ export default function ProspectsPage() {
                                         <button
                                             onClick={() => handleEdit(prospect)}
                                             className="text-blue-600 hover:text-blue-900"
-                                            aria-label="Modifier"
+                                            aria-label={t('prospectsPage.actionEdit')}
                                         >
                                             <Pencil className="h-4 w-4" />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(prospect.id)}
                                             className="text-red-600 hover:text-red-900"
-                                            aria-label="Supprimer"
+                                            aria-label={t('prospectsPage.actionDelete')}
                                         >
                                             <Trash2 className="h-4 w-4" />
                                         </button>
@@ -238,7 +232,9 @@ export default function ProspectsPage() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-10 bg-opacity-50">
                     <div className="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
                         <div className="flex justify-between items-start mb-4">
-                            <h3 className="text-xl font-semibold">{editingProspect ? "Modifier le prospect" : "Ajouter un prospect"}</h3>
+                            <h3 className="text-xl font-semibold">
+                                {editingProspect ? t('prospectsPage.modalTitleEdit') : t('prospectsPage.modalTitleAdd')}
+                            </h3>
                             <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                                 <span className="sr-only">Fermer</span>
                                 <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -249,7 +245,7 @@ export default function ProspectsPage() {
                         <form onSubmit={handleSubmit}>
                             <div className="space-y-4">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nom</label>
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">{t('prospectsPage.labelName')}</label>
                                     <input
                                         id="name"
                                         name="name"
@@ -261,7 +257,7 @@ export default function ProspectsPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('prospectsPage.labelEmail')}</label>
                                     <input
                                         id="email"
                                         name="email"
@@ -273,7 +269,7 @@ export default function ProspectsPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Téléphone</label>
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">{t('prospectsPage.labelPhone')}</label>
                                     <input
                                         id="phone"
                                         name="phone"
@@ -291,13 +287,13 @@ export default function ProspectsPage() {
                                     onClick={() => setIsModalOpen(false)}
                                     className="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors"
                                 >
-                                    Annuler
+                                    {t('prospectsPage.cancel')}
                                 </button>
                                 <button
                                     type="submit"
                                     className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
                                 >
-                                    {editingProspect ? "Modifier" : "Ajouter"}
+                                    {editingProspect ? t('prospectsPage.submitEdit') : t('prospectsPage.submitAdd')}
                                 </button>
                             </div>
                         </form>
