@@ -26,10 +26,8 @@ const PhotoGallery: React.FC = () => {
     // Remplacez '123456789' par l'ID de votre vidéo Vimeo
     const videos = [
         { id: "1114323603", title: "Vidéo 1" },
-        { id: "987654321", title: "Vidéo 2" },
-        { id: "135792468", title: "Vidéo 3" },
-        { id: "246813579", title: "Vidéo 4" },
-        { id: "112233445", title: "Vidéo 5" }
+        { id: "1114860207", title: "Vidéo 2" },
+        { id: "1114862260", title: "Vidéo 3" },
     ];
 
     useEffect(() => {
