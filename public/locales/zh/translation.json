@@ -93,7 +93,7 @@
     "photoAlt": "图片描述 ",
     "scrollLeft": "向左滚动",
     "scrollRight": "向右滚动"
-  },
+  },"videoGallery": { "title": "我们的视频库" },
   "prospectsPage": {
     "loading": "正在加载数据...",
     "errorApi": "获取数据时出错：",
@@ -254,5 +254,22 @@
     "connectionError": "无法连接到服务器。请检查您的连接。",
     "phoneInfoLabel": "电话号码",
     "whatsappLinkText": "在WhatsApp上联系我们"
+  },
+  "prospectionPage": {
+    "loading": "正在加载数据...",
+    "errorApiFormat": "错误：API数据格式不正确。",
+    "errorApiConnection": "无法连接到API。错误：",
+    "dashboardTitle": "管理员仪表板",
+    "noProspects": "未找到任何条目。",
+    "logout": "注销",
+    "title": "潜在客户开发",
+    "subtitle": "需要联系的潜在客户列表",
+    "listTitle": "潜在客户列表",
+    "totalProspects": "共有 1 个潜在客户",
+    "totalProspects_plural": "共有 {{count}} 个潜在客户",
+    "tableHeaderName": "姓名",
+    "tableHeaderProfileTitle": "个人资料标题",
+    "tableHeaderProfileLink": "个人资料链接",
+    "tableHeaderDescription": "描述"
   }
 }

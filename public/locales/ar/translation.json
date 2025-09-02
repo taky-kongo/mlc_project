@@ -93,6 +93,9 @@
     "scrollLeft": "التمرير لليسار",
     "scrollRight": "التمرير لليمين"
   },
+  "videoGallery": {
+    "title": "معرض الفيديو الخاص بنا"
+  },
   "prospectsPage": {
     "loading": "جاري تحميل البيانات...",
     "errorApi": "خطأ في جلب البيانات: ",
@@ -253,5 +256,22 @@
     "connectionError": "تعذر الاتصال بالخادم. يرجى التحقق من اتصالك.",
     "phoneInfoLabel": "رقم الهاتف",
     "whatsappLinkText": "تواصل معنا على واتساب"
+  },
+  "prospectionPage": {
+    "loading": "يتم تحميل البيانات...",
+    "errorApiFormat": "خطأ: تنسيق بيانات واجهة برمجة التطبيقات غير صحيح.",
+    "errorApiConnection": "لا يمكن الاتصال بواجهة برمجة التطبيقات. خطأ: ",
+    "dashboardTitle": "لوحة تحكم المسؤول",
+    "noProspects": "لم يتم العثور على أي إدخالات.",
+    "logout": "تسجيل الخروج",
+    "title": "التنقيب",
+    "subtitle": "قائمة العملاء المحتملين للاتصال بهم",
+    "listTitle": "قائمة العملاء المحتملين",
+    "totalProspects": "إجمالي عميل واحد محتمل",
+    "totalProspects_plural": "إجمالي {{count}} عملاء محتملين",
+    "tableHeaderName": "الاسم",
+    "tableHeaderProfileTitle": "عنوان الملف الشخصي",
+    "tableHeaderProfileLink": "رابط الملف الشخصي",
+    "tableHeaderDescription": "الوصف"
   }
 }

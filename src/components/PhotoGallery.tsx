@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 const PhotoGallery: React.FC = () => {
     const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
-    // eslint-disable-next-line no-empty-pattern
-    const [isScrollingPaused, {/*setIsScrollingPaused*/}] = useState(false); // Nouvel état pour mettre en pause le défilement
+    const [isScrollingPaused, setIsScrollingPaused] = useState(false); // Nouvel état pour mettre en pause le défilement
     const sectionRef = useRef<HTMLElement>(null);
     const photoCarouselRef = useRef<HTMLDivElement>(null);
     const videoCarouselRef = useRef<HTMLDivElement>(null);
@@ -24,11 +23,11 @@ const PhotoGallery: React.FC = () => {
         { src: "/img/galerie/photo10.jpg", alt: "Description Photo 10" },
     ];
 
-    {/*const videos = [
+    const videos = [
         { id: "1114323603", title: "Vidéo 1" },
         { id: "1114860207", title: "Vidéo 2" },
         { id: "1114862260", title: "Vidéo 3" },
-    ];*/}
+    ];
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -174,7 +173,7 @@ const PhotoGallery: React.FC = () => {
                     </div>
                 </div>
 
-                {/*<h2 className="text-4xl font-bold mb-12">{t('videoGallery.title')}</h2>
+                <h2 className="text-4xl font-bold mb-12">{t('videoGallery.title')}</h2>
                 <div className="relative">
                     <button
                         onClick={() => scrollVideoCarousel('left')}
@@ -218,7 +217,7 @@ const PhotoGallery: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                </div>*/}
+                </div>
             </div>
         </section>
     );

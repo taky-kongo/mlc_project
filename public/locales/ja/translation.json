@@ -92,7 +92,7 @@
     "photoAlt": "写真の説明 ",
     "scrollLeft": "左にスクロール",
     "scrollRight": "右にスクロール"
-  },
+  },"videoGallery": { "title": "私たちの動画ギャラリー" },
   "prospectsPage": {
     "loading": "データを読み込み中...",
     "errorApi": "データの取得中にエラーが発生しました：",
@@ -253,5 +253,22 @@
     "connectionError": "サーバーに接続できませんでした。接続を確認してください。",
     "phoneInfoLabel": "電話番号",
     "whatsappLinkText": "WhatsAppで私たちに連絡"
+  },
+  "prospectionPage": {
+    "loading": "データを読み込み中...",
+    "errorApiFormat": "エラー：APIデータ形式が正しくありません。",
+    "errorApiConnection": "APIに接続できませんでした。エラー：",
+    "dashboardTitle": "管理者ダッシュボード",
+    "noProspects": "エントリが見つかりません。",
+    "logout": "ログアウト",
+    "title": "プロスペクティング",
+    "subtitle": "連絡先リスト",
+    "listTitle": "見込み客リスト",
+    "totalProspects": "合計 1 件の見込み客",
+    "totalProspects_plural": "合計 {{count}} 件の見込み客",
+    "tableHeaderName": "名前",
+    "tableHeaderProfileTitle": "プロフィールタイトル",
+    "tableHeaderProfileLink": "プロフィールリンク",
+    "tableHeaderDescription": "説明"
   }
 }

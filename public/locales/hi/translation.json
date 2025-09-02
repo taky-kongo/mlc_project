@@ -92,7 +92,7 @@
     "photoAlt": "फोटो विवरण ",
     "scrollLeft": "बाएं स्क्रॉल करें",
     "scrollRight": "दाएं स्क्रॉल करें"
-  },
+  },"videoGallery": { "title": "हमारी वीडियो गैलरी" },
   "prospectsPage": {
     "loading": "डेटा लोड हो रहा है...",
     "errorApi": "डेटा लाने में त्रुटि: ",
@@ -253,5 +253,22 @@
     "connectionError": "सर्वर से कनेक्ट नहीं हो सका। कृपया अपना कनेक्शन जांचें।",
     "phoneInfoLabel": "फ़ोन नंबर",
     "whatsappLinkText": "WhatsApp पर हमसे संपर्क करें"
+  },
+  "prospectionPage": {
+    "loading": "डेटा लोड हो रहा है...",
+    "errorApiFormat": "त्रुटि: एपीआई डेटा प्रारूप गलत है।",
+    "errorApiConnection": "एपीआई से कनेक्ट नहीं हो सका। त्रुटि: ",
+    "dashboardTitle": "प्रशासक डैशबोर्ड",
+    "noProspects": "कोई प्रविष्टियाँ नहीं मिलीं।",
+    "logout": "लॉग आउट",
+    "title": "संभावित ग्राहक",
+    "subtitle": "संपर्क करने के लिए संभावित ग्राहकों की सूची",
+    "listTitle": "संभावित ग्राहकों की सूची",
+    "totalProspects": "कुल 1 संभावित ग्राहक",
+    "totalProspects_plural": "कुल {{count}} संभावित ग्राहक",
+    "tableHeaderName": "नाम",
+    "tableHeaderProfileTitle": "प्रोफ़ाइल शीर्षक",
+    "tableHeaderProfileLink": "प्रोफ़ाइल लिंक",
+    "tableHeaderDescription": "विवरण"
   }
 }

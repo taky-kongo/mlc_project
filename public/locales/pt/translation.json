@@ -92,7 +92,7 @@
     "photoAlt": "Descrição da foto ",
     "scrollLeft": "Rolar para a esquerda",
     "scrollRight": "Rolar para a direita"
-  },
+  },"videoGallery": { "title": "Nossa Galeria de Vídeos" },
   "prospectsPage": {
     "loading": "Carregando dados...",
     "errorApi": "Erro ao buscar dados: ",
@@ -253,5 +253,22 @@
     "connectionError": "Não foi possível conectar-se ao servidor. Por favor, verifique sua conexão.",
     "phoneInfoLabel": "Número de telefone",
     "whatsappLinkText": "Contate-nos no WhatsApp"
+  },
+  "prospectionPage": {
+  "loading": "Carregando dados...",
+  "errorApiFormat": "Erro: Formato de dados da API incorreto.",
+  "errorApiConnection": "Não foi possível conectar-se à API. Erro: ",
+  "dashboardTitle": "Painel do Administrador",
+  "noProspects": "Nenhum registro encontrado.",
+  "logout": "Sair",
+  "title": "Prospecção",
+  "subtitle": "Lista de clientes em potencial a serem contatados",
+  "listTitle": "Lista de clientes em potencial",
+  "totalProspects": "Total de 1 cliente em potencial",
+  "totalProspects_plural": "Total de {{count}} clientes em potencial",
+  "tableHeaderName": "Nome",
+  "tableHeaderProfileTitle": "Título do perfil",
+  "tableHeaderProfileLink": "Link do perfil",
+  "tableHeaderDescription": "Descrição"
   }
 }

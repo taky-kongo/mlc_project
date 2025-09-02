@@ -92,7 +92,7 @@
     "photoAlt": "Descripción de la foto ",
     "scrollLeft": "Desplazarse a la izquierda",
     "scrollRight": "Desplazarse a la derecha"
-  },
+  },"videoGallery": { "title": "Nuestra Galería de Videos" },
   "prospectsPage": {
     "loading": "Cargando datos...",
     "errorApi": "Error al recuperar los datos: ",
@@ -253,5 +253,23 @@
     "connectionError": "No se pudo conectar con el servidor. Por favor, verifica tu conexión.",
     "phoneInfoLabel": "Número de teléfono",
     "whatsappLinkText": "Contáctanos en WhatsApp"
+  },
+  "prospectionPage": {
+    "prospectionPage": {
+      "loading": "Cargando datos...",
+      "errorApiFormat": "Error: Formato de datos de la API incorrecto.",
+      "errorApiConnection": "No se pudo conectar a la API. Error: ",
+      "dashboardTitle": "Panel de administrador",
+      "noProspects": "No se encontraron inscripciones.",
+      "logout": "Cerrar sesión",
+      "title": "Prospección",
+      "subtitle": "Lista de prospectos a contactar",
+      "listTitle": "Lista de prospectos",
+      "totalProspects": "1 prospecto en total",
+      "totalProspects_plural": "{{count}} prospectos en total",
+      "tableHeaderName": "Nombre",
+      "tableHeaderProfileTitle": "Título del perfil",
+      "tableHeaderProfileLink": "Enlace del perfil",
+      "tableHeaderDescription": "Descripción"
   }
 }

@@ -93,6 +93,9 @@
     "scrollLeft": "Scroll left",
     "scrollRight": "Scroll right"
   },
+  "videoGallery": {
+    "title": "Our Video Gallery"
+  },
   "prospectsPage": {
     "loading": "Loading data...",
     "errorApi": "Error fetching data: ",
@@ -253,5 +256,22 @@
     "connectionError": "Could not connect to the server. Please check your connection.",
     "phoneInfoLabel": "Phone number",
     "whatsappLinkText": "Contact us on WhatsApp"
+  },
+  "prospectionPage": {
+    "loading": "Loading data...",
+    "errorApiFormat": "Error: Incorrect API data format.",
+    "errorApiConnection": "Could not connect to the API. Error: ",
+    "dashboardTitle": "Administrator Dashboard",
+    "noProspects": "No entries found.",
+    "logout": "Logout",
+    "title": "Lead Generation",
+    "subtitle": "List of prospects to contact",
+    "listTitle": "Prospects List",
+    "totalProspects": "Total of 1 prospect",
+    "totalProspects_plural": "Total of {{count}} prospects",
+    "tableHeaderName": "Name",
+    "tableHeaderProfileTitle": "Profile title",
+    "tableHeaderProfileLink": "Profile link",
+    "tableHeaderDescription": "Description"
   }
 }

@@ -92,7 +92,7 @@
     "photoAlt": "Описание фото ",
     "scrollLeft": "Прокрутить влево",
     "scrollRight": "Прокрутить вправо"
-  },
+  },"videoGallery": { "title": "Наша Видеогалерея" },
   "prospectsPage": {
     "loading": "Загрузка данных...",
     "errorApi": "Ошибка при получении данных: ",
@@ -253,5 +253,22 @@
     "connectionError": "Не удалось подключиться к серверу. Пожалуйста, проверьте ваше соединение.",
     "phoneInfoLabel": "Номер телефона",
     "whatsappLinkText": "Свяжитесь с нами в WhatsApp"
+  },
+  "prospectionPage": {
+    "loading": "Загрузка данных...",
+    "errorApiFormat": "Ошибка: Неверный формат данных API.",
+    "errorApiConnection": "Не удалось подключиться к API. Ошибка: ",
+    "dashboardTitle": "Панель администратора",
+    "noProspects": "Записи не найдены.",
+    "logout": "Выйти",
+    "title": "Разведка",
+    "subtitle": "Список потенциальных клиентов для связи",
+    "listTitle": "Список потенциальных клиентов",
+    "totalProspects": "Всего 1 потенциальный клиент",
+    "totalProspects_plural": "Всего {{count}} потенциальных клиентов",
+    "tableHeaderName": "Имя",
+    "tableHeaderProfileTitle": "Заголовок профиля",
+    "tableHeaderProfileLink": "Ссылка на профиль",
+    "tableHeaderDescription": "Описание"
   }
 }

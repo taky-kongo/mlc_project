@@ -92,7 +92,7 @@
     "photoAlt": "Foto Beschreibung ",
     "scrollLeft": "Nach links scrollen",
     "scrollRight": "Nach rechts scrollen"
-  },
+  },"videoGallery": { "title": "Unsere Videogalerie" },
   "prospectsPage": {
     "loading": "Daten werden geladen...",
     "errorApi": "Fehler beim Abrufen der Daten: ",
@@ -253,5 +253,22 @@
     "connectionError": "Verbindung zum Server konnte nicht hergestellt werden. Bitte überprüfe deine Verbindung.",
     "phoneInfoLabel": "Telefonnummer",
     "whatsappLinkText": "Kontaktiere uns auf WhatsApp"
+  },
+  "prospectionPage": {
+    "loading": "Daten werden geladen...",
+    "errorApiFormat": "Fehler: Ungültiges API-Datenformat.",
+    "errorApiConnection": "Verbindung zur API nicht möglich. Fehler: ",
+    "dashboardTitle": "Administrator-Dashboard",
+    "noProspects": "Keine Einträge gefunden.",
+    "logout": "Abmelden",
+    "title": "Akquise",
+    "subtitle": "Liste der zu kontaktierenden Interessenten",
+    "listTitle": "Interessentenliste",
+    "totalProspects": "Insgesamt 1 Interessent",
+    "totalProspects_plural": "Insgesamt {{count}} Interessenten",
+    "tableHeaderName": "Name",
+    "tableHeaderProfileTitle": "Profil-Titel",
+    "tableHeaderProfileLink": "Profil-Link",
+    "tableHeaderDescription": "Beschreibung"
   }
 }
