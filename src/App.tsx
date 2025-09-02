@@ -21,6 +21,7 @@ import AdminDashboard from './components/AdminDashboard';
 import DashboardLayout from './components/DashboardLayout';
 import ProspectsPage from './components/ProspectsPage';
 import UserProfilePage from './components/UserProfilePage';
+import ProspectionPage from './components/ProspectionPage';
 
 
 // Composant pour la page d'accueil, regroupant tous les éléments publics
@@ -90,6 +91,7 @@ const App = () => {
                 >
                     <Route path="dashboard" element={<AdminDashboard />} />
                     <Route path="prospects" element={<ProspectsPage />} />
+                    <Route path="prospection" element={<ProspectionPage />} />
                     <Route path="profile" element={<UserProfilePage />} />
                 </Route>
             </Routes>
