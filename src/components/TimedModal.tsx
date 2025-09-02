@@ -104,17 +104,21 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    // États pour le formulaire
     const [nom, setNom] = useState('');
     const [email, setEmail] = useState('');
     const [contacts, setContacts] = useState('');
 
+    // États pour la recherche et la sélection de l'indicatif
     const [searchCode, setSearchCode] = useState('');
     const [showCodeDropdown, setShowCodeDropdown] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
+    // Effet pour réinitialiser la vue quand le modal s'ouvre
     useEffect(() => {
         if (isOpen) {
             setView('intro');
+            // Réinitialise les champs du formulaire à chaque ouverture
             setNom('');
             setEmail('');
             setContacts('');
@@ -123,6 +127,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
         }
     }, [isOpen]);
 
+    // Gérer la soumission du formulaire
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrorMessage('');
@@ -135,7 +140,8 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
         };
 
         try {
-            const response = await fetch('https://api.mlc.ci/api/submit-form', {
+            //const response = await fetch('http://localhost:8000/api/submit-form', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/api/submit-form', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -165,11 +171,13 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
         }
     };
 
+    // Filtrer les pays en fonction de la recherche
     const filteredCountries = countries.filter(country =>
         t(`countries.${country.name}`).toLowerCase().includes(searchCode.toLowerCase()) ||
         country.code.includes(searchCode)
     );
 
+    // Le composant ne rend rien si la prop `isOpen` est fausse
     if (!isOpen) {
         return null;
     }
@@ -231,9 +239,11 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                             />
                         </div>
 
+                        {/* Champ WhatsApp avec la recherche d'indicatif intégrée */}
                         <div>
                             <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-700">{t('timedModal.labelWhatsApp')}</label>
                             <div className="flex mt-1">
+                                {/* Composant de recherche d'indicatif */}
                                 <div className="relative w-1/3 mr-2">
                                     <input
                                         type="text"
@@ -270,6 +280,7 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
                                         </ul>
                                     )}
                                 </div>
+                                {/* Champ pour le numéro de téléphone */}
                                 <input
                                     type="tel"
                                     id="whatsapp"

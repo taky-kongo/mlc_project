@@ -1,19 +1,20 @@
 // src/components/Sidebar.tsx
 
 import { NavLink, useLocation } from 'react-router-dom';
-import { Users, Menu, X } from 'lucide-react';
 import { useState } from "react";
 import { useTranslation } from "react-i18next"; // Import du hook de traduction
+import { Users, Menu, X, UserRoundSearch } from 'lucide-react';
 
 interface SidebarProps {
     className?: string;
 }
 
 const navigation = [
-    // L'objet de navigation utilise maintenant des clés de traduction pour la propriété 'name'
-    { nameKey: 'sidebar.prospects', href: '/admin/prospects', icon: Users },
-    //{ nameKey: 'sidebar.dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-    //{ nameKey: 'sidebar.myAccount', href: '/admin/profile', icon: UserRoundCog },
+  //{ name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+  { name: 'Prospects', href: '/admin/prospects', icon: Users },
+  { name: 'Prospection', href: '/admin/prospection', icon: UserRoundSearch },
+  //{ name: 'Mon compte', href: '/admin/profile', icon: UserRoundCog },
+
 ];
 
 export default function Sidebar({ className }: SidebarProps) {

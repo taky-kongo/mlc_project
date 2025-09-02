@@ -5,9 +5,11 @@ import { Users, TrendingUp, DollarSign, Target } from "lucide-react";
 import { useTranslation } from 'react-i18next'; // Importez le hook
 
 interface UserData {
+    // Les champs doivent correspondre exactement à la casse de votre backend
     Nom: string;
     Email: string;
     Contacts: string;
+    // J'ai laissé ce champ mais l'ai rendu optionnel car il n'est pas dans la réponse API
     date?: string;
 }
 
@@ -63,7 +65,8 @@ const AdminDashboard: React.FC = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('https://api.mlc.ci/admin', {
+            //const response = await fetch('http://127.0.0.1:8000/admin', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/admin', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,11 +80,11 @@ const AdminDashboard: React.FC = () => {
                 if (Array.isArray(responseData.data)) {
                     setUsers(responseData.data);
                 } else {
-                    console.error(t("dashboardPage.errors.dataFormat"));
-                    setError(t("dashboardPage.errors.dataFormat"));
+                    console.error("Le format de données de l'API est incorrect. La clé 'data' n'est pas un tableau.");
+                    setError("Erreur : Le format de données de l'API est incorrect.");
                 }
             } else if (response.status === 401 || response.status === 403) {
-                console.error(t("dashboardPage.errors.auth"));
+                console.error("Erreur d'authentification. Redirection vers la page de connexion.");
                 handleLogout();
             } else {
                 setError(t('dashboardPage.errors.fetch', { statusText: response.statusText }));

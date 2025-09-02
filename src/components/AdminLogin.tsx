@@ -18,8 +18,7 @@ const AdminLogin: React.FC = () => {
         setIsLoading(true);
 
         try {
-            // L'URL de votre endpoint de connexion
-            const response = await fetch('https://api.mlc.ci/login', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

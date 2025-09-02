@@ -152,7 +152,7 @@ const ContactForm: React.FC = () => {
 
         try {
             console.log(formData);
-            const response = await fetch('https://api.mlc.ci/api/submit-form', {
+            const response = await fetch('https://mon-back-mlc.onrender.com/api/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -208,6 +208,7 @@ const ContactForm: React.FC = () => {
                                     {t('contactForm.phoneLabel')}
                                 </label>
                                 <div className="flex flex-col sm:flex-row mt-1 relative w-full" ref={dropdownRef}>
+                                    {/* Déclencheur du dropdown personnalisé */}
                                     <div
                                         className="flex items-center justify-between w-full sm:w-48 px-4 py-3 bg-white border border-gray-300 rounded-md sm:rounded-r-none text-gray-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#3a75ff]"
                                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -228,6 +229,8 @@ const ContactForm: React.FC = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </div>
+
+                                    {/* Contenu du dropdown avec barre de recherche (affiché conditionnellement) */}
                                     {isDropdownOpen && (
                                         <div className="absolute top-full left-0 mt-1 w-full sm:w-64 bg-white border border-gray-300 rounded-md shadow-lg z-20">
                                             <input
@@ -293,10 +296,10 @@ const ContactForm: React.FC = () => {
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
-                                        {t('contactForm.sendingText')}
+                                        Envoi en cours...
                                     </>
                                 ) : (
-                                    t('contactForm.sendButton')
+                                    "Envoyer"
                                 )}
                             </button>
                             {message && (
@@ -307,6 +310,7 @@ const ContactForm: React.FC = () => {
                         </form>
                     </div>
 
+                    {/* Informations de contact */}
                     <div className="w-full md:w-1/3 p-8 md:p-0">
                         <div className="flex items-center space-x-4 mb-8">
                             <div className="bg-[#3a75ff] p-3 rounded-full">

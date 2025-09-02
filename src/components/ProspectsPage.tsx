@@ -17,12 +17,14 @@ export default function ProspectsPage() {
     const { t } = useTranslation();
     const [prospects, setProspects] = useState<Prospect[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
-    const totalPages = Math.ceil(prospects.length / itemsPerPage);
-    const paginatedProspects = prospects.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 10; // J'ai augmenté la valeur pour un affichage plus réaliste
+
+    // const totalPages = Math.ceil(prospects?.total_count / itemsPerPage);
+    // const paginatedProspects = prospects.slice(
+    //     (currentPage - 1) * itemsPerPage,
+    //     currentPage * itemsPerPage
+    // );
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProspect, setEditingProspect] = useState<Prospect | null>(null);
     const [formData, setFormData] = useState({
@@ -40,26 +42,36 @@ export default function ProspectsPage() {
         if (!jwtToken) {
             navigate('/admin/login');
         } else {
-            fetchProspects(jwtToken);
+            fetchProspects(currentPage);
         }
-    }, [navigate]);
+    }, [currentPage]);
 
-    const fetchProspects = async (token: string) => {
+    const fetchProspects = async (page: number = 1) => {
         setLoading(true);
         setError('');
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            navigate('/admin/login');
+            return;
+        }
         try {
-            const response = await fetch('https://api.mlc.ci/prospects', {
+            const response = await fetch(`https://mon-back-mlc.onrender.com/prospects/?page=${page}`, {
+
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${jwtToken}`,
                 },
             });
 
             if (response.ok) {
                 const responseData = await response.json();
+                setProspects([]);
+
+                // La réponse de l'API est correcte, on peut directement utiliser la clé 'items'
                 if (Array.isArray(responseData?.items)) {
                     setProspects(responseData.items);
+                    setTotalPages(Math.ceil(responseData.total_count / itemsPerPage));
                 } else {
                     console.error("Le format de données de l'API est incorrect. La clé 'items' n'est pas un tableau.");
                     setError(t('prospectsPage.errorFormat'));
@@ -80,6 +92,7 @@ export default function ProspectsPage() {
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
+        fetchProspects(page);
     };
 
     const handleLogout = () => {
@@ -113,20 +126,46 @@ export default function ProspectsPage() {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const newId = Math.random().toString(36).substring(2, 9);
+        // const newId = Math.random().toString(36).substring(2, 9); // Générer un ID unique
 
         if (editingProspect) {
+            // Update existing prospect
             setProspects(prospects.map((p) => (p.id === editingProspect.id ? { ...p, ...formData } : p)));
         } else {
-            const newProspect: Prospect = {
-                id: newId,
-                nom: formData.name,
-                email: formData.email,
-                contacts: formData.phone,
-            };
-            setProspects([...prospects, newProspect]);
+            // Add new prospect
+            // const newProspect: Prospect = {
+            //     nom: formData.name,
+            //     email: formData.email,
+            //     contacts: formData.phone,
+            // };
+            try {
+                const response = await fetch('https://mon-back-mlc.onrender.com/prospects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+                    },
+                    body: JSON.stringify({
+                        nom: formData.name,
+                        email: formData.email,
+                        contacts: formData.phone,
+                    }),
+                });
+                console.log('Add response:', response);
+                if (!response.ok) {
+                    console.error('Erreur lors de l\'ajout du prospect:', response.statusText);
+                    // Tu peux aussi afficher une notification ou un toast ici
+                }
+                fetchProspects(currentPage);
+                resetForm();
+                setIsModalOpen(false);
+                setEditingProspect(null);
+            } catch (error) {
+                console.error('Erreur d\'ajout :', error);
+                // Tu peux aussi afficher une notification ou un toast ici
+            }
         }
 
         resetForm();
@@ -143,9 +182,34 @@ export default function ProspectsPage() {
         setIsModalOpen(true);
     };
 
-    const handleDelete = (id: string) => {
-        setProspects(prospects.filter((p) => p.id !== id));
-    };
+    const handleDelete = async (id: string) => {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            navigate('/admin/login');
+            return;
+        }
+        try {
+            const response = await fetch(`https://mon-back-mlc.onrender.com/prospects/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (response.ok) {
+                fetchProspects(currentPage);
+            } else if (response.status === 401 || response.status === 403) {
+                console.error("Erreur d'authentification. Redirection vers la page de connexion.");
+                handleLogout();
+            } else {
+                setError(`Erreur lors de la récupération des données : ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Erreur de suppression :', error);
+            // Tu peux aussi afficher une notification ou un toast ici
+        }
+        };
+
 
     const resetForm = () => {
         setFormData({
@@ -192,7 +256,7 @@ export default function ProspectsPage() {
                         </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                        {paginatedProspects.map((prospect) => (
+                        {prospects.map((prospect) => (
                             <tr key={prospect.id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{prospect.nom}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{prospect.email}</td>
@@ -223,7 +287,7 @@ export default function ProspectsPage() {
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={handlePageChange}
+                    onPageChange={(newPage)=>handlePageChange(newPage)}
                 />
             </div>
 
@@ -292,6 +356,7 @@ export default function ProspectsPage() {
                                 <button
                                     type="submit"
                                     className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                                    disabled={!formData.name || !formData.email || !formData.phone}
                                 >
                                     {editingProspect ? t('prospectsPage.submitEdit') : t('prospectsPage.submitAdd')}
                                 </button>
