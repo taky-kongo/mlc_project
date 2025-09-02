@@ -22,6 +22,7 @@ import DashboardLayout from './components/DashboardLayout';
 import ProspectsPage from './components/ProspectsPage';
 import UserProfilePage from './components/UserProfilePage';
 import ProspectionPage from './components/ProspectionPage';
+import { Toaster } from 'react-hot-toast';
 
 
 // Composant pour la page d'accueil, regroupant tous les éléments publics
@@ -73,6 +74,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 const App = () => {
     return (
         <Router>
+            <Toaster position="top-center" reverseOrder={false} />
             <Routes>
                 {/* Route pour la page d'accueil */}
                 <Route path="/" element={<HomePage />} />
@@ -93,6 +95,7 @@ const App = () => {
                     <Route path="prospects" element={<ProspectsPage />} />
                     <Route path="prospection" element={<ProspectionPage />} />
                     <Route path="profile" element={<UserProfilePage />} />
+
                 </Route>
             </Routes>
         </Router>

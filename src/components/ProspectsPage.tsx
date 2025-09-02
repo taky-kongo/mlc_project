@@ -4,14 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import toast from "react-hot-toast";
 
 interface Prospect {
     id: string;
     nom: string;
     email: string;
     contacts: string;
-//   company: string;
-//   status: "nouveau" | "contacté" | "qualifié" | "converti";
 }
 
 export default function ProspectsPage() {
@@ -21,11 +20,6 @@ export default function ProspectsPage() {
     const [totalPages, setTotalPages] = useState(1);
     const itemsPerPage = 10; // J'ai augmenté la valeur pour un affichage plus réaliste
 
-    // const totalPages = Math.ceil(prospects?.total_count / itemsPerPage);
-    // const paginatedProspects = prospects.slice(
-    //     (currentPage - 1) * itemsPerPage,
-    //     currentPage * itemsPerPage
-    // );
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProspect, setEditingProspect] = useState<Prospect | null>(null);
     const [formData, setFormData] = useState({
@@ -35,6 +29,8 @@ export default function ProspectsPage() {
     });
 
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [deletingId, setDeletingId] = useState<string | null>(null);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -129,7 +125,7 @@ export default function ProspectsPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // const newId = Math.random().toString(36).substring(2, 9); // Générer un ID unique
+        setIsLoading(true);
 
         if (editingProspect) {
             // Update existing prospect
@@ -151,22 +147,22 @@ export default function ProspectsPage() {
                 if (!response.ok) {
                     console.error('Erreur lors de la mise à jour du prospect:', response.statusText);
                     // Tu peux aussi afficher une notification ou un toast ici
+                    toast.error('Erreur lors de la mise à jour du prospect.')
                 }
                 fetchProspects(currentPage);
                 resetForm();
                 setIsModalOpen(false);
                 setEditingProspect(null);
+                toast.success('Prospect mis à jour avec succès !')
             } catch (error) {
                 console.error('Erreur de mise à jour :', error);
                 // Tu peux aussi afficher une notification ou un toast ici
+            }finally {
+                setIsLoading(false);
             }
+
         } else {
-            // Add new prospect
-            // const newProspect: Prospect = {
-            //     nom: formData.name,
-            //     email: formData.email,
-            //     contacts: formData.phone,
-            // };
+
             try {
                 const response = await fetch('https://mon-back-mlc.onrender.com/prospects', {
                     method: 'POST',
@@ -184,14 +180,19 @@ export default function ProspectsPage() {
                 if (!response.ok) {
                     console.error('Erreur lors de l\'ajout du prospect:', response.statusText);
                     // Tu peux aussi afficher une notification ou un toast ici
+                    toast.error('Erreur lors de l\'ajout du prospect.')
                 }
                 fetchProspects(currentPage);
                 resetForm();
                 setIsModalOpen(false);
                 setEditingProspect(null);
+                toast.success('Prospect ajouté avec succès !')
             } catch (error) {
                 console.error('Erreur d\'ajout :', error);
                 // Tu peux aussi afficher une notification ou un toast ici
+                toast.error('Erreur lors de l\'ajout du prospect.')
+            }finally {
+                setIsLoading(false);
             }
         }
 
@@ -211,6 +212,7 @@ export default function ProspectsPage() {
 
     const handleDelete = async (id: string) => {
         const token = localStorage.getItem('jwtToken');
+        setDeletingId(id);
         if (!token) {
             navigate('/admin/login');
             return;
@@ -224,7 +226,8 @@ export default function ProspectsPage() {
                 },
             });
             if (response.ok) {
-                fetchProspects(currentPage);              
+                fetchProspects(currentPage);    
+                toast.success('Prospect supprimé avec succès !')          
             } else if (response.status === 401 || response.status === 403) {
                 console.error("Erreur d'authentification. Redirection vers la page de connexion.");
                 handleLogout();
@@ -234,8 +237,10 @@ export default function ProspectsPage() {
         } catch (error) {
             console.error('Erreur de suppression :', error);
             // Tu peux aussi afficher une notification ou un toast ici
+        }finally {
+            setDeletingId(null);
         }
-        };
+    };
 
 
     const resetForm = () => {
@@ -301,8 +306,13 @@ export default function ProspectsPage() {
                                             onClick={() => handleDelete(prospect.id)}
                                             className="text-red-600 hover:text-red-900"
                                             aria-label="Supprimer"
+                                            disabled={deletingId === prospect.id}
                                         >
-                                            <Trash2 className="h-4 w-4" />
+                                            {deletingId === prospect.id ? (
+                                                <div className="animate-spin h-4 w-4 border-2 border-red-600 border-t-transparent rounded-full"></div>
+                                            ) : (
+                                                <Trash2 className="h-4 w-4" />
+                                            )}
                                         </button>
                                     </div>
                                 </td>
@@ -379,10 +389,13 @@ export default function ProspectsPage() {
                                     Annuler
                                 </button>
                                 <button
+                                    disabled={isLoading}
                                     type="submit"
-                                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
-                                    disabled={!formData.name || !formData.email || !formData.phone}
-                                >
+                                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                                    >
+                                    {isLoading && (
+                                        <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                                    )}
                                     {editingProspect ? "Modifier" : "Ajouter"}
                                 </button>
                             </div>

@@ -1,5 +1,6 @@
 // src/components/AdminLogin.tsx
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const AdminLogin: React.FC = () => {
@@ -33,6 +34,8 @@ const AdminLogin: React.FC = () => {
                 // Stockage du JWT et de l'état d'authentification
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('isAuthenticated', 'true');
+
+                toast.success('Connecté avec succès !')
 
                 navigate('/admin/prospects'); // Redirection vers le dashboard après connexion réussie
             } else {
