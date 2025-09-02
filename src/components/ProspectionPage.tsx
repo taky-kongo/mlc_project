@@ -95,7 +95,7 @@ export default function ProspectionPage() {
         return (
             <div className="container mx-auto p-6 text-center">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Tableau de bord administrateur</h1>
-                <p className="text-gray-500">Aucune inscription trouvée.</p>
+                <p className="text-gray-500">Aucune prospects trouvés.</p>
                 <button onClick={handleLogout} className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
                     Déconnexion
                 </button>
@@ -107,8 +107,8 @@ export default function ProspectionPage() {
         <div className="space-y-6 p-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Prospection</h1>
-                    <p className="text-gray-500">Liste des prospects à constacter</p>
+                    <h1 className="text-3xl font-bold tracking-tight">Prospects trouvés</h1>
+                    <p className="text-gray-500">Liste des prospects touvés sur internet à convertir en client MLC</p>
                 </div>
             </div>
 
