@@ -2,95 +2,98 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaWhatsapp } from "react-icons/fa";
+import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
+import type { CountryCode } from 'libphonenumber-js';
 
 // Je définis le type pour les pays pour plus de clarté
 interface Country {
     code: string;
+    isoCode: CountryCode; // Ajout de l'isoCode pour la validation
     name: string; // Cette propriété est maintenant la clé de traduction
     flag: string;
 }
 
-// Liste des pays utilisant les clés de traduction pour le nom.
+// Liste des pays (les noms seront traduits via i18n)
 const countries: Country[] = [
-    { code: '+1', name: 'United States', flag: '🇺🇸' },
-    { code: '+7', name: 'Russia', flag: '🇷🇺' },
-    { code: '+20', name: 'Egypt', flag: '🇪🇬' },
-    { code: '+27', name: 'South Africa', flag: '🇿🇦' },
-    { code: '+30', name: 'Greece', flag: '🇬🇷' },
-    { code: '+31', name: 'Netherlands', flag: '🇳🇱' },
-    { code: '+32', name: 'Belgium', flag: '🇧🇪' },
-    { code: '+33', name: 'France', flag: '🇫🇷' },
-    { code: '+34', name: 'Spain', flag: '🇪🇸' },
-    { code: '+39', name: 'Italy', flag: '🇮🇹' },
-    { code: '+44', name: 'United Kingdom', flag: '🇬🇧' },
-    { code: '+49', name: 'Germany', flag: '🇩🇪' },
-    { code: '+52', name: 'Mexico', flag: '🇲🇽' },
-    { code: '+54', name: 'Argentina', flag: '🇦🇷' },
-    { code: '+55', name: 'Brazil', flag: '🇧🇷' },
-    { code: '+56', name: 'Chile', flag: '🇨🇱' },
-    { code: '+61', name: 'Australia', flag: '🇦🇺' },
-    { code: '+62', name: 'Indonesia', flag: '🇮🇩' },
-    { code: '+63', name: 'Philippines', flag: '🇵🇭' },
-    { code: '+64', name: 'New Zealand', flag: '🇳🇿' },
-    { code: '+65', name: 'Singapore', flag: '🇸🇬' },
-    { code: '+66', name: 'Thailand', flag: '🇹🇭' },
-    { code: '+81', name: 'Japan', flag: '🇯🇵' },
-    { code: '+82', name: 'South Korea', flag: '🇰🇷' },
-    { code: '+86', name: 'China', flag: '🇨🇳' },
-    { code: '+90', name: 'Turkey', flag: '🇹🇷' },
-    { code: '+91', name: 'India', flag: '🇮🇳' },
-    { code: '+92', name: 'Pakistan', flag: '🇵🇰' },
-    { code: '+93', name: 'Afghanistan', flag: '🇦🇫' },
-    { code: '+94', name: 'Sri Lanka', flag: '🇱🇰' },
-    { code: '+95', name: 'Myanmar', flag: '🇲🇲' },
-    { code: '+98', name: 'Iran', flag: '🇮🇷' },
-    { code: '+212', name: 'Morocco', flag: '🇲🇦' },
-    { code: '+213', name: 'Algeria', flag: '🇩🇿' },
-    { code: '+216', name: 'Tunisia', flag: '🇹🇳' },
-    { code: '+220', name: 'Gambia', flag: '🇬🇲' },
-    { code: '+221', name: 'Senegal', flag: '🇸🇳' },
-    { code: '+223', name: 'Mali', flag: '🇲🇱' },
-    { code: '+224', name: 'Guinea', flag: '🇬🇳' },
-    { code: '+225', name: 'Ivory Coast', flag: '🇨🇮' },
-    { code: '+226', name: 'Burkina Faso', flag: '🇧🇫' },
-    { code: '+227', name: 'Niger', flag: '🇳🇪' },
-    { code: '+228', name: 'Togo', flag: '🇹🇬' },
-    { code: '+229', name: 'Benin', flag: '🇧🇯' },
-    { code: '+230', name: 'Mauritius', flag: '🇲🇺' },
-    { code: '+233', name: 'Ghana', flag: '🇬🇭' },
-    { code: '+234', name: 'Nigeria', flag: '🇳🇬' },
-    { code: '+237', name: 'Cameroon', flag: '🇨🇲' },
-    { code: '+243', name: 'DR Congo', flag: '🇨🇩' },
-    { code: '+250', name: 'Rwanda', flag: '🇷🇼' },
-    { code: '+251', name: 'Ethiopia', flag: '🇪🇹' },
-    { code: '+254', name: 'Kenya', flag: '🇰🇪' },
-    { code: '+255', name: 'Tanzania', flag: '🇹🇿' },
-    { code: '+260', name: 'Zambia', flag: '🇿🇲' },
-    { code: '+263', name: 'Zimbabwe', flag: '🇿🇼' },
-    { code: '+351', name: 'Portugal', flag: '🇵🇹' },
-    { code: '+353', name: 'Ireland', flag: '🇮🇪' },
-    { code: '+358', name: 'Finland', flag: '🇫🇮' },
-    { code: '+420', name: 'Czechia', flag: '🇨🇿' },
-    { code: '+421', name: 'Slovakia', flag: '🇸🇰' },
-    { code: '+48', name: 'Poland', flag: '🇵🇱' },
-    { code: '+971', name: 'United Arab Emirates', flag: '🇦🇪' },
-    { code: '+972', name: 'Israel', flag: '🇮🇱' },
-    { code: '+974', name: 'Qatar', flag: '🇶🇦' },
-    { code: '+966', name: 'Saudi Arabia', flag: '🇸🇦' },
-    { code: '+961', name: 'Lebanon', flag: '🇱🇧' },
-    { code: '+962', name: 'Jordan', flag: '🇯🇴' },
-    { code: '+963', name: 'Syria', flag: '🇸🇾' },
-    { code: '+964', name: 'Iraq', flag: '🇮🇶' },
-    { code: '+965', name: 'Kuwait', flag: '🇰🇼' },
-    { code: '+968', name: 'Oman', flag: '🇴🇲' },
-    { code: '+970', name: 'Palestine', flag: '🇵🇸' },
-    { code: '+975', name: 'Bhutan', flag: '🇧🇹' },
-    { code: '+976', name: 'Mongolia', flag: '🇲🇳' },
-    { code: '+977', name: 'Nepal', flag: '🇳🇵' },
-    { code: '+994', name: 'Azerbaijan', flag: '🇦🇿' },
-    { code: '+995', name: 'Georgia', flag: '🇬🇪' },
-    { code: '+996', name: 'Kyrgyzstan', flag: '🇰🇬' },
-    { code: '+998', name: 'Uzbekistan', flag: '🇺🇿' }
+    { code: '+1', isoCode: 'US', name: 'United States', flag: '🇺🇸' },
+    { code: '+7', isoCode: 'RU', name: 'Russia', flag: '🇷🇺' },
+    { code: '+20', isoCode: 'EG', name: 'Egypt', flag: '🇪🇬' },
+    { code: '+27', isoCode: 'ZA', name: 'South Africa', flag: '🇿🇦' },
+    { code: '+30', isoCode: 'GR', name: 'Greece', flag: '🇬🇷' },
+    { code: '+31', isoCode: 'NL', name: 'Netherlands', flag: '🇳🇱' },
+    { code: '+32', isoCode: 'BE', name: 'Belgium', flag: '🇧🇪' },
+    { code: '+33', isoCode: 'FR', name: 'France', flag: '🇫🇷' },
+    { code: '+34', isoCode: 'ES', name: 'Spain', flag: '🇪🇸' },
+    { code: '+39', isoCode: 'IT', name: 'Italy', flag: '🇮🇹' },
+    { code: '+44', isoCode: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
+    { code: '+49', isoCode: 'DE', name: 'Germany', flag: '🇩🇪' },
+    { code: '+52', isoCode: 'MX', name: 'Mexico', flag: '🇲🇽' },
+    { code: '+54', isoCode: 'AR', name: 'Argentina', flag: '🇦🇷' },
+    { code: '+55', isoCode: 'BR', name: 'Brazil', flag: '🇧🇷' },
+    { code: '+56', isoCode: 'CL', name: 'Chile', flag: '🇨🇱' },
+    { code: '+61', isoCode: 'AU', name: 'Australia', flag: '🇦🇺' },
+    { code: '+62', isoCode: 'ID', name: 'Indonesia', flag: '🇮🇩' },
+    { code: '+63', isoCode: 'PH', name: 'Philippines', flag: '🇵🇭' },
+    { code: '+64', isoCode: 'NZ', name: 'New Zealand', flag: '🇳🇿' },
+    { code: '+65', isoCode: 'SG', name: 'Singapore', flag: '🇸🇬' },
+    { code: '+66', isoCode: 'TH', name: 'Thailand', flag: '🇹🇭' },
+    { code: '+81', isoCode: 'JP', name: 'Japan', flag: '🇯🇵' },
+    { code: '+82', isoCode: 'KR', name: 'South Korea', flag: '🇰🇷' },
+    { code: '+86', isoCode: 'CN', name: 'China', flag: '🇨🇳' },
+    { code: '+90', isoCode: 'TR', name: 'Turkey', flag: '🇹🇷' },
+    { code: '+91', isoCode: 'IN', name: 'India', flag: '🇮🇳' },
+    { code: '+92', isoCode: 'PK', name: 'Pakistan', flag: '🇵🇰' },
+    { code: '+93', isoCode: 'AF', name: 'Afghanistan', flag: '🇦🇫' },
+    { code: '+94', isoCode: 'LK', name: 'Sri Lanka', flag: '🇱🇰' },
+    { code: '+95', isoCode: 'MM', name: 'Myanmar', flag: '🇲🇲' },
+    { code: '+98', isoCode: 'IR', name: 'Iran', flag: '🇮🇷' },
+    { code: '+212', isoCode: 'MA', name: 'Morocco', flag: '🇲🇦' },
+    { code: '+213', isoCode: 'DZ', name: 'Algeria', flag: '🇩🇿' },
+    { code: '+216', isoCode: 'TN', name: 'Tunisia', flag: '🇹🇳' },
+    { code: '+220', isoCode: 'GM', name: 'Gambia', flag: '🇬🇲' },
+    { code: '+221', isoCode: 'SN', name: 'Senegal', flag: '🇸🇳' },
+    { code: '+223', isoCode: 'ML', name: 'Mali', flag: '🇲🇱' },
+    { code: '+224', isoCode: 'GN', name: 'Guinea', flag: '🇬🇳' },
+    { code: '+225', isoCode: 'CI', name: 'Ivory Coast', flag: '🇨🇮' },
+    { code: '+226', isoCode: 'BF', name: 'Burkina Faso', flag: '🇧🇫' },
+    { code: '+227', isoCode: 'NE', name: 'Niger', flag: '🇳🇪' },
+    { code: '+228', isoCode: 'TG', name: 'Togo', flag: '🇹🇬' },
+    { code: '+229', isoCode: 'BJ', name: 'Benin', flag: '🇧🇯' },
+    { code: '+230', isoCode: 'MU', name: 'Mauritius', flag: '🇲🇺' },
+    { code: '+233', isoCode: 'GH', name: 'Ghana', flag: '🇬🇭' },
+    { code: '+234', isoCode: 'NG', name: 'Nigeria', flag: '🇳🇬' },
+    { code: '+237', isoCode: 'CM', name: 'Cameroon', flag: '🇨🇲' },
+    { code: '+243', isoCode: 'CD', name: 'DR Congo', flag: '🇨🇩' },
+    { code: '+250', isoCode: 'RW', name: 'Rwanda', flag: '🇷🇼' },
+    { code: '+251', isoCode: 'ET', name: 'Ethiopia', flag: '🇪🇹' },
+    { code: '+254', isoCode: 'KE', name: 'Kenya', flag: '🇰🇪' },
+    { code: '+255', isoCode: 'TZ', name: 'Tanzania', flag: '🇹🇿' },
+    { code: '+260', isoCode: 'ZM', name: 'Zambia', flag: '🇿🇲' },
+    { code: '+263', isoCode: 'ZW', name: 'Zimbabwe', flag: '🇿🇼' },
+    { code: '+351', isoCode: 'PT', name: 'Portugal', flag: '🇵🇹' },
+    { code: '+353', isoCode: 'IE', name: 'Ireland', flag: '🇮🇪' },
+    { code: '+358', isoCode: 'FI', name: 'Finland', flag: '🇫🇮' },
+    { code: '+420', isoCode: 'CZ', name: 'Czechia', flag: '🇨🇿' },
+    { code: '+421', isoCode: 'SK', name: 'Slovakia', flag: '🇸🇰' },
+    { code: '+48', isoCode: 'PL', name: 'Poland', flag: '🇵🇱' },
+    { code: '+971', isoCode: 'AE', name: 'United Arab Emirates', flag: '🇦🇪' },
+    { code: '+972', isoCode: 'IL', name: 'Israel', flag: '🇮🇱' },
+    { code: '+974', isoCode: 'QA', name: 'Qatar', flag: '🇶🇦' },
+    { code: '+966', isoCode: 'SA', name: 'Saudi Arabia', flag: '🇸🇦' },
+    { code: '+961', isoCode: 'LB', name: 'Lebanon', flag: '🇱🇧' },
+    { code: '+962', isoCode: 'JO', name: 'Jordan', flag: '🇯🇴' },
+    { code: '+963', isoCode: 'SY', name: 'Syria', flag: '🇸🇾' },
+    { code: '+964', isoCode: 'IQ', name: 'Iraq', flag: '🇮🇶' },
+    { code: '+965', isoCode: 'KW', name: 'Kuwait', flag: '🇰🇼' },
+    { code: '+968', isoCode: 'OM', name: 'Oman', flag: '🇴🇲' },
+    { code: '+970', isoCode: 'PS', name: 'Palestine', flag: '🇵🇸' },
+    { code: '+975', isoCode: 'BT', name: 'Bhutan', flag: '🇧🇹' },
+    { code: '+976', isoCode: 'MN', name: 'Mongolia', flag: '🇲🇳' },
+    { code: '+977', isoCode: 'NP', name: 'Nepal', flag: '🇳🇵' },
+    { code: '+994', isoCode: 'AZ', name: 'Azerbaijan', flag: '🇦🇿' },
+    { code: '+995', isoCode: 'GE', name: 'Georgia', flag: '🇬🇪' },
+    { code: '+996', isoCode: 'KG', name: 'Kyrgyzstan', flag: '🇰🇬' },
+    { code: '+998', isoCode: 'UZ', name: 'Uzbekistan', flag: '🇺🇿' }
 ];
 
 const ContactForm: React.FC = () => {
@@ -105,6 +108,7 @@ const ContactForm: React.FC = () => {
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false); // Ajout d'un état de validation
 
     const [searchQuery, setSearchQuery] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -132,6 +136,15 @@ const ContactForm: React.FC = () => {
         };
     }, [dropdownRef]);
 
+    // **NOUVEAU** Effet pour valider le numéro en temps réel
+    useEffect(() => {
+        if (selectedCountry && contacts) {
+            setIsPhoneNumberValid(isValidPhoneNumber(contacts, selectedCountry.isoCode));
+        } else {
+            setIsPhoneNumberValid(false);
+        }
+    }, [contacts, selectedCountry]);
+
     const handleCountrySelect = (country: Country) => {
         setSelectedCountry(country);
         setIsDropdownOpen(false);
@@ -144,14 +157,25 @@ const ContactForm: React.FC = () => {
         setSubmissionStatus('idle');
         setMessage('');
 
+        // **NOUVEAU** Vérification de la validité avant l'envoi
+        if (!isPhoneNumberValid) {
+            setSubmissionStatus('error');
+            setMessage(t('timedModal.invalidPhoneNumber'));
+            setIsLoading(false);
+            return;
+        }
+
+        // **MODIFIÉ** Utilisation de parsePhoneNumber pour un formatage correct
+        const phoneNumber = parsePhoneNumber(contacts, selectedCountry.isoCode);
+        const contacts_formated = phoneNumber?.number || '';
+
         const formData = {
             nom: nom,
-            contacts: selectedCountry.code + contacts,
+            contacts: contacts_formated,
             email,
         };
 
         try {
-            console.log(formData);
             const response = await fetch('https://mon-back-mlc.onrender.com/api/submit-form', {
                 method: 'POST',
                 headers: {
@@ -161,7 +185,6 @@ const ContactForm: React.FC = () => {
             });
 
             if (response.ok) {
-                console.log(formData);
                 setSubmissionStatus('success');
                 setMessage(t('contactForm.successMessage'));
                 setNom('');
@@ -265,12 +288,17 @@ const ContactForm: React.FC = () => {
                                     <input
                                         type="tel"
                                         id="phone"
-                                        className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-md sm:rounded-l-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#3a75ff] mt-2 sm:mt-0"
+                                        className={`flex-1 px-4 py-3 bg-white border rounded-md sm:rounded-l-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#3a75ff] mt-2 sm:mt-0 ${contacts && !isPhoneNumberValid ? 'border-red-500' : 'border-gray-300'}`}
                                         value={contacts}
                                         onChange={(e) => setContacts(e.target.value.replace(/[^0-9]/g, ''))}
                                         required
                                     />
                                 </div>
+                                {contacts && !isPhoneNumberValid && (
+                                    <p className="text-sm text-red-500 mt-1">
+                                        {t('timedModal.invalidPhoneNumber')}
+                                    </p>
+                                )}
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-gray-600">
@@ -288,7 +316,7 @@ const ContactForm: React.FC = () => {
                             <button
                                 type="submit"
                                 className={`w-full bg-[#3a75ff] text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center`}
-                                disabled={isLoading}
+                                disabled={isLoading || !isPhoneNumberValid} // Désactivation si le numéro n'est pas valide
                             >
                                 {isLoading ? (
                                     <>

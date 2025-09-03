@@ -180,7 +180,6 @@ const TimedModal: React.FC<TimedModalProps> = ({ isOpen, onClose }) => {
             }
 
             const data = await response.json();
-            console.log(data);
 
             if (data.status_code === 201) {
                 setSubmissionMessage(t('timedModal.successMessage'));
