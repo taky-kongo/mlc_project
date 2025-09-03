@@ -93,20 +93,23 @@
     "photoAlt": "图片描述 ",
     "scrollLeft": "向左滚动",
     "scrollRight": "向右滚动"
-  },"videoGallery": { "title": "我们的视频库" },
+  },
+  "videoGallery": {
+    "title": "我们的视频库"
+  },
   "prospectsPage": {
     "loading": "正在加载数据...",
     "errorApi": "获取数据时出错：",
     "errorFormat": "错误：API数据格式不正确。",
     "errorConnection": "无法连接到API。错误：",
-    "noProspects": "未找到注册。",
-    "logout": "退出",
+    "noProspects": "未找到任何注册。",
+    "logout": "退出登录",
     "title": "潜在客户",
-    "subtitle": "管理您的潜在客户并跟踪他们的进度",
+    "subtitle": "管理您的潜在客户并跟踪其进度",
     "addProspect": "添加潜在客户",
     "listTitle": "潜在客户列表",
-    "totalProspects": "共 {{count}} 个潜在客户",
-    "totalProspects_plural": "共 {{count}} 个潜在客户",
+    "totalProspects": "总计：{{count}}个潜在客户",
+    "totalProspects_plural": "{{count}}个潜在客户",
     "tableHeaderName": "姓名",
     "tableHeaderEmail": "电子邮件",
     "tableHeaderPhone": "电话",
@@ -119,7 +122,13 @@
     "labelPhone": "电话",
     "cancel": "取消",
     "submitAdd": "添加",
-    "submitEdit": "保存"
+    "submitEdit": "编辑",
+    "submitEditError": "更新潜在客户时出错。",
+    "submitEditSuccess": "潜在客户已成功更新！",
+    "submitAddError": "添加潜在客户时出错。",
+    "submitAddSuccess": "潜在客户已成功添加！",
+    "deleteSuccess": "潜在客户已成功删除！",
+    "deleteError": "删除潜在客户时出错。"
   },
   "sidebar": {
     "dashboard": "仪表板",

@@ -107,7 +107,7 @@
     "subtitle": "Gérez vos prospects et suivez leur progression",
     "addProspect": "Ajouter un prospect",
     "listTitle": "Liste des prospects",
-    "totalProspects": "{{count}} prospect",
+    "totalProspects": "Total : {{count}} prospects",
     "totalProspects_plural": "{{count}} prospects",
     "tableHeaderName": "Nom",
     "tableHeaderEmail": "Email",
@@ -121,7 +121,13 @@
     "labelPhone": "Téléphone",
     "cancel": "Annuler",
     "submitAdd": "Ajouter",
-    "submitEdit": "Modifier"
+    "submitEdit": "Modifier",
+    "submitEditError": "Erreur lors de la mise à jour du prospect.",
+    "submitEditSuccess": "Prospect mis à jour avec succès !",
+    "submitAddError": "Erreur lors de l'ajout du prospect.",
+    "submitAddSuccess": "Prospect ajouté avec succès !",
+    "deleteSuccess": "Prospect supprimé avec succès !",
+    "deleteError": "Erreur lors de la suppression du prospect."
   },
   "sidebar": {
     "dashboard": "Tableau de bord",

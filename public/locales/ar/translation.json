@@ -97,18 +97,18 @@
     "title": "معرض الفيديو الخاص بنا"
   },
   "prospectsPage": {
-    "loading": "جاري تحميل البيانات...",
+    "loading": "يتم تحميل البيانات...",
     "errorApi": "خطأ في جلب البيانات: ",
     "errorFormat": "خطأ: تنسيق بيانات API غير صحيح.",
-    "errorConnection": "تعذر الاتصال بـ API. خطأ: ",
+    "errorConnection": "لا يمكن الاتصال بواجهة برمجة التطبيقات (API). خطأ: ",
     "noProspects": "لم يتم العثور على أي تسجيلات.",
     "logout": "تسجيل الخروج",
     "title": "العملاء المحتملون",
-    "subtitle": "إدارة العملاء المحتملين وتتبع تقدمهم",
+    "subtitle": "إدارة عملائك المحتملين وتتبع تقدمهم",
     "addProspect": "إضافة عميل محتمل",
     "listTitle": "قائمة العملاء المحتملين",
-    "totalProspects": "عميل محتمل واحد",
-    "totalProspects_plural": "{{count}} عملاء محتملون",
+    "totalProspects": "الإجمالي: {{count}} عميل محتمل",
+    "totalProspects_plural": "{{count}} عميل محتمل",
     "tableHeaderName": "الاسم",
     "tableHeaderEmail": "البريد الإلكتروني",
     "tableHeaderPhone": "الهاتف",
@@ -121,7 +121,13 @@
     "labelPhone": "الهاتف",
     "cancel": "إلغاء",
     "submitAdd": "إضافة",
-    "submitEdit": "تعديل"
+    "submitEdit": "تعديل",
+    "submitEditError": "خطأ في تحديث العميل المحتمل.",
+    "submitEditSuccess": "تم تحديث العميل المحتمل بنجاح!",
+    "submitAddError": "خطأ في إضافة العميل المحتمل.",
+    "submitAddSuccess": "تمت إضافة العميل المحتمل بنجاح!",
+    "deleteSuccess": "تم حذف العميل المحتمل بنجاح!",
+    "deleteError": "خطأ في حذف العميل المحتمل."
   },
   "sidebar": {
     "dashboard": "لوحة القيادة",

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import { useTranslation } from "react-i18next"; // Import du hook de traduction
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 
 interface Prospect {
@@ -21,13 +21,7 @@ export default function ProspectsPage() {
     const [prospects, setProspects] = useState<Prospect[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 10; // J'ai augmenté la valeur pour un affichage plus réaliste
-
-    // const totalPages = Math.ceil(prospects?.total_count / itemsPerPage);
-    // const paginatedProspects = prospects.slice(
-    //     (currentPage - 1) * itemsPerPage,
-    //     currentPage * itemsPerPage
-    // );
+    const itemsPerPage = 10;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProspect, setEditingProspect] = useState<Prospect | null>(null);
     const [formData, setFormData] = useState({
@@ -73,7 +67,6 @@ export default function ProspectsPage() {
                 const responseData = await response.json();
                 setProspects([]);
 
-                // La réponse de l'API est correcte, on peut directement utiliser la clé 'items'
                 if (Array.isArray(responseData?.items)) {
                     setProspects(responseData.items);
                     setTotalPages(Math.ceil(responseData.total_count / itemsPerPage));
@@ -154,17 +147,16 @@ export default function ProspectsPage() {
                 console.log('Update response:', response);
                 if (!response.ok) {
                     console.error('Erreur lors de la mise à jour du prospect:', response.statusText);
-                    // Tu peux aussi afficher une notification ou un toast ici
-                    toast.error('Erreur lors de la mise à jour du prospect.')
+                    toast.error(t('prospectsPage.submitEditError'));
                 }
                 fetchProspects(currentPage);
                 resetForm();
                 setIsModalOpen(false);
                 setEditingProspect(null);
-                toast.success('Prospect mis à jour avec succès !')
+                toast.success(t('prospectsPage.submitEditSuccess'));
             } catch (error) {
                 console.error('Erreur de mise à jour :', error);
-                // Tu peux aussi afficher une notification ou un toast ici
+                toast.error(t('prospectsPage.submitEditError'));
             }finally {
                 setIsLoading(false);
             }
@@ -187,18 +179,16 @@ export default function ProspectsPage() {
                 console.log('Add response:', response);
                 if (!response.ok) {
                     console.error('Erreur lors de l\'ajout du prospect:', response.statusText);
-                    // Tu peux aussi afficher une notification ou un toast ici
-                    toast.error('Erreur lors de l\'ajout du prospect.')
+                    toast.error(t('prospectsPage.submitAddError'));
                 }
                 fetchProspects(currentPage);
                 resetForm();
                 setIsModalOpen(false);
                 setEditingProspect(null);
-                toast.success('Prospect ajouté avec succès !')
+                toast.success(t('prospectsPage.submitAddSuccess'));
             } catch (error) {
                 console.error('Erreur d\'ajout :', error);
-                // Tu peux aussi afficher une notification ou un toast ici
-                toast.error('Erreur lors de l\'ajout du prospect.')
+                toast.error(t('prospectsPage.submitAddError'));
             }finally {
                 setIsLoading(false);
             }
@@ -235,16 +225,17 @@ export default function ProspectsPage() {
             });
             if (response.ok) {
                 fetchProspects(currentPage);
-                toast.success('Prospect supprimé avec succès !')
+                toast.success(t('prospectsPage.deleteSuccess'));
             } else if (response.status === 401 || response.status === 403) {
                 console.error("Erreur d'authentification. Redirection vers la page de connexion.");
                 handleLogout();
             } else {
-                setError(`Erreur lors de la récupération des données : ${response.statusText}`);
+                setError(`${t('prospectsPage.errorApi')}${response.statusText}`);
+                toast.error(t('prospectsPage.deleteError'));
             }
         } catch (error) {
             console.error('Erreur de suppression :', error);
-            // Tu peux aussi afficher une notification ou un toast ici
+            toast.error(t('prospectsPage.deleteError'));
         }finally {
             setDeletingId(null);
         }

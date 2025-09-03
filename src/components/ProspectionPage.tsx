@@ -1,4 +1,4 @@
-// src/components/ProspectsPage.tsx
+// src/components/ProspectionPage.tsx
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,6 @@ export default function ProspectionPage() {
             if (response.ok) {
                 const responseData = await response.json();
 
-                // La réponse de l'API est correcte, on peut directement utiliser la clé 'items'
                 if (Array.isArray(responseData?.data)) {
                     responseData?.data.shift();
                     setProspects(responseData?.data);
@@ -117,7 +116,7 @@ export default function ProspectionPage() {
             <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-bold mb-2">{t('prospectionPage.listTitle')}</h2>
                 <p className="text-gray-500 mb-6">
-                    {t('prospectionPage.totalProspects', { count: prospects.length })}
+                    {t('prospectionPage.totalProspects_plural', { count: prospects.length })}
                 </p>
                 <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200">
