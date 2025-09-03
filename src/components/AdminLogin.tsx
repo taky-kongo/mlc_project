@@ -1,5 +1,6 @@
 // src/components/AdminLogin.tsx
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +19,8 @@ const AdminLogin: React.FC = () => {
         setIsLoading(true);
 
         try {
+            // L'URL de votre endpoint de connexion
+            //const response = await fetch('http://127.0.0.1:8000/admin/login', {
             const response = await fetch('https://mon-back-mlc.onrender.com/login', {
                 method: 'POST',
                 headers: {
@@ -27,13 +30,17 @@ const AdminLogin: React.FC = () => {
             });
 
             if (response.ok) {
+                // Le backend renvoie le JWT dans le corps de la réponse JSON
                 const data = await response.json();
                 const jwtToken = data.access_token;
 
+                // Stockage du JWT et de l'état d'authentification
                 localStorage.setItem('jwtToken', jwtToken);
                 localStorage.setItem('isAuthenticated', 'true');
 
-                navigate('/admin/prospects');
+                toast.success('Connecté avec succès !')
+
+                navigate('/admin/prospects'); // Redirection vers le dashboard après connexion réussie
             } else {
                 setError(t('loginPage.errorCredentials'));
             }

@@ -1,3 +1,5 @@
+// src/components/ProspectsPage.tsx
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -51,6 +53,7 @@ export default function ProspectionPage() {
             if (response.ok) {
                 const responseData = await response.json();
 
+                // La réponse de l'API est correcte, on peut directement utiliser la clé 'items'
                 if (Array.isArray(responseData?.data)) {
                     responseData?.data.shift();
                     setProspects(responseData?.data);
