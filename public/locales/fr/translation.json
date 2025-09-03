@@ -159,7 +159,8 @@
     "submitButton": "Je m'inscris",
     "submittingButton": "Envoi en cours...",
     "successTitle": "C'est parfait !",
-    "successMessage": "C'est parfait ! Vous recevrez un e-mail avec les prochaines étapes à suivre. Merci !"
+    "successMessage": "C'est parfait ! Vous recevrez un e-mail avec les prochaines étapes à suivre. Merci !",
+    "invalidPhoneNumber": "Veuillez entrer un numéro de téléphone valide pour le pays sélectionné."
   },
   "countries": {
     "United States": "États-Unis",

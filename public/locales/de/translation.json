@@ -156,7 +156,8 @@
     "submitButton": "Ich melde mich an",
     "submittingButton": "Wird gesendet...",
     "successTitle": "Das ist perfekt!",
-    "successMessage": "Das ist perfekt! Sie erhalten eine E-Mail mit den nächsten Schritten. Danke!"
+    "successMessage": "Das ist perfekt! Sie erhalten eine E-Mail mit den nächsten Schritten. Danke!",
+    "invalidPhoneNumber": "Bitte geben Sie eine gültige Telefonnummer für das ausgewählte Land ein."
   },
   "countries": {
     "United States": "Vereinigte Staaten",

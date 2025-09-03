@@ -156,7 +156,8 @@
     "submitButton": "登録する",
     "submittingButton": "送信中...",
     "successTitle": "完璧です！",
-    "successMessage": "完璧です！次のステップを記載したメールが届きます。ありがとうございます！"
+    "successMessage": "完璧です！次のステップを記載したメールが届きます。ありがとうございます！",
+    "invalidPhoneNumber": "選択した国に対して有効な電話番号を入力してください。"
   },
   "countries": {
     "United States": "アメリカ合衆国",

@@ -156,7 +156,8 @@
     "submitButton": "Eu me inscrevo",
     "submittingButton": "Enviando...",
     "successTitle": "É perfeito!",
-    "successMessage": "É perfeito! Você receberá um e-mail com os próximos passos a seguir. Obrigado!"
+    "successMessage": "É perfeito! Você receberá um e-mail com os próximos passos a seguir. Obrigado!",
+    "invalidPhoneNumber": "Por favor, insira um número de telefone válido para o país selecionado."
   },
   "countries": {
     "United States": "Estados Unidos",

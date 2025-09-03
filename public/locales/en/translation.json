@@ -159,7 +159,8 @@
     "submitButton": "I sign up",
     "submittingButton": "Sending...",
     "successTitle": "That's perfect!",
-    "successMessage": "That's perfect! You will receive an email with the next steps to follow. Thank you!"
+    "successMessage": "That's perfect! You will receive an email with the next steps to follow. Thank you!",
+    "invalidPhoneNumber": "Please enter a valid phone number for the selected country."
     },
   "countries": {
     "United States": "United States",

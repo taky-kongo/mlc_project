@@ -156,7 +156,8 @@
     "submitButton": "Me registro",
     "submittingButton": "Enviando...",
     "successTitle": "¡Es perfecto!",
-    "successMessage": "¡Es perfecto! Recibirás un correo electrónico con los próximos pasos a seguir. ¡Gracias!"
+    "successMessage": "¡Es perfecto! Recibirás un correo electrónico con los próximos pasos a seguir. ¡Gracias!",
+    "invalidPhoneNumber": "Por favor, ingrese un número de teléfono válido para el país seleccionado."
   },
   "countries": {
     "United States": "Estados Unidos",
@@ -254,7 +255,6 @@
     "phoneInfoLabel": "Número de teléfono",
     "whatsappLinkText": "Contáctanos en WhatsApp"
   },
-  "prospectionPage": {
     "prospectionPage": {
       "loading": "Cargando datos...",
       "errorApiFormat": "Error: Formato de datos de la API incorrecto.",

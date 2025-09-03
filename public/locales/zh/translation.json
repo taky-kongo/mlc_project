@@ -157,7 +157,8 @@
     "submitButton": "我注册",
     "submittingButton": "正在发送...",
     "successTitle": "太棒了！",
-    "successMessage": "太棒了！您将收到一封包含后续步骤的电子邮件。谢谢！"
+    "successMessage": "太棒了！您将收到一封包含后续步骤的电子邮件。谢谢！",
+    "invalidPhoneNumber": "请输入所选国家/地区的有效电话号码。"
   },
   "countries": {
     "United States": "美国",
