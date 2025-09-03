@@ -25,7 +25,7 @@ const PhotoGallery: React.FC = () => {
 
     const videos = [
         { id: "1114323603", title: "Vidéo 1" },
-        { id: "1114860207", title: "Vidéo 2" },
+        { id: "1115540267", title: "Vidéo 2" },
         { id: "1114862260", title: "Vidéo 3" },
     ];
 
