@@ -32,7 +32,7 @@ const LanguageSelector: React.FC = () => {
             <select
                 value={i18n.language}
                 onChange={handleLanguageChange}
-                className="block w-full pl-9 pr-4 py-2 text-sm bg-gray-700 rounded-md border-gray-600 focus:border-blue-500 focus:ring-blue-500 appearance-none cursor-pointer transition-colors duration-200"
+                className="block w-full pl-9 pr-4 py-2 text-sm bg-blue-600 rounded-md border-gray-600 focus:border-blue-700 focus:ring-blue-500 appearance-none cursor-pointer transition-colors duration-200 hover:bg-blue-700"
             >
                 {languages.map((lang) => (
                     <option key={lang.code} value={lang.code}>
