@@ -126,6 +126,7 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "prospects": "Prospects",
+    "prospection": "Found Prospects",
     "myAccount": "My Account",
     "admin": "Administrator",
     "emailExample": "john@example.com"

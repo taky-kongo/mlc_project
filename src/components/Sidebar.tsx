@@ -10,11 +10,10 @@ interface SidebarProps {
 }
 
 const navigation = [
-  //{ name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-  { name: 'Prospects', href: '/admin/prospects', icon: Users },
-  { name: 'Prospection', href: '/admin/prospection', icon: UserRoundSearch },
-  //{ name: 'Mon compte', href: '/admin/profile', icon: UserRoundCog },
-
+    // { name: 'Dashboard', nameKey: 'sidebar.dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { name: 'Prospects', nameKey: 'sidebar.prospects', href: '/admin/prospects', icon: Users },
+    { name: 'Prospection', nameKey: 'sidebar.prospection', href: '/admin/prospection', icon: UserRoundSearch },
+    // { name: 'Mon compte', nameKey: 'sidebar.myAccount', href: '/admin/profile', icon: UserRoundCog },
 ];
 
 export default function Sidebar({ className }: SidebarProps) {

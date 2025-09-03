@@ -126,6 +126,7 @@
   "sidebar": {
     "dashboard": "لوحة القيادة",
     "prospects": "العملاء المحتملون",
+    "prospection": "العملاء المحتملون",
     "myAccount": "حسابي",
     "admin": "المسؤول",
     "emailExample": "john@example.com"

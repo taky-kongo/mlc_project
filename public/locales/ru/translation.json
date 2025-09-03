@@ -123,6 +123,7 @@
   "sidebar": {
     "dashboard": "Панель управления",
     "prospects": "Потенциальные клиенты",
+    "prospection": "Найденные потенциальные клиенты",
     "myAccount": "Мой аккаунт",
     "admin": "Администратор",
     "emailExample": "john@example.com"

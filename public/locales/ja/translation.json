@@ -123,6 +123,7 @@
   "sidebar": {
     "dashboard": "ダッシュボード",
     "prospects": "見込み客",
+    "prospection": "見込み客",
     "myAccount": "マイアカウント",
     "admin": "管理者",
     "emailExample": "john@example.com"

@@ -124,6 +124,7 @@
   "sidebar": {
     "dashboard": "仪表板",
     "prospects": "潜在客户",
+    "prospection": "已找到的潜在客户",
     "myAccount": "我的账户",
     "admin": "管理员",
     "emailExample": "john@example.com"

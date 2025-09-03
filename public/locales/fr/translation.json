@@ -126,6 +126,7 @@
   "sidebar": {
     "dashboard": "Tableau de bord",
     "prospects": "Prospects",
+    "prospection": "Prospects Trouvés",
     "myAccount": "Mon compte",
     "admin": "Administrateur",
     "emailExample": "john@example.com"
@@ -265,7 +266,7 @@
     "dashboardTitle": "Tableau de bord administrateur",
     "noProspects": "Aucune inscription trouvée.",
     "logout": "Déconnexion",
-    "title": "Prospection",
+    "title": "Prospects Trouvés",
     "subtitle": "Liste des prospects à contacter",
     "listTitle": "Liste des prospects",
     "totalProspects": "1 prospect au total",
