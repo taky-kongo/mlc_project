@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
                     onClick={onOpenModal}
                     className="inline-block bg-[#3a75ff] hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer"
                 >
-                    Je rejoins la communauté maintenant !
+                    Rejoindre le projet
                 </button>
             </div>
         </section>
